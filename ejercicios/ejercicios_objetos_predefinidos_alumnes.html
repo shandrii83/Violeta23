@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ejercicios de Objetos predefinidos en Javascript</title>
+
+        <style>
+                table {
+                    border-collapse: collapse;
+                    width: 50%;
+                }
+                table, th, td {
+                    border: 1px solid black;
+                }
+                th, td {
+                    padding: 10px;
+                    text-align: center;
+                }
+            </style>
+        
+</head>
+
+<body>
+        <div class="w3-container">
+                <h1>
+                        Ejercicios de Objetos predefinidos en Javascript
+                </h1>
+                <!-- Ejercicio 1 -->
+                <h4>Crea un nuevo documento HTML con un script que a partir de un interactivo nos muestre el ancho de
+                        pantalla, alto de pantalla y diagonal de pantalla en pixels.</h4>
+
+                <div id="mostra_ejer1"></div>
+
+                <button class="TamanosDePantalla" id="btn_ejer1" onclick="medidas()">Ejecutar el ejercicio</button>
+
+<script>
+
+const screenWidth = window.screen.width
+const screenHeight = window.screen.height
+const screenDiagonal = Math.sqrt(Math.pow(screenWidth, 2) + Math.pow(screenHeight, 2));
+/* console.log(screenHeight);
+console.log(screenWidth); */
+
+
+function medidas() {
+        const screenWidth = window.screen.width
+const screenHeight = window.screen.height
+const screenDiagonal = Math.sqrt(Math.pow(screenWidth, 2) + Math.pow(screenHeight, 2));
+
+alert("Ancho de pantalla: " + screenWidth + " pixels\nAlto de pantalla: " + screenHeight + " pixels\nDiagonal de pantalla: " + screenDiagonal.toFixed(2) + " pixels");
+        }
+</script>
+
+
+                <!-- Ejercicio 2 -->
+                <h4>Construye un programa que accionemos con un botón y calcule un número aleatorio del 1 al 10 y lo
+                        muestre en una div del html.</h4>
+
+                <div class="" id="mostra_ejer2">El numero aleatorio es:</div>
+
+                <button class="aleatorio" id="btn_ejer2" onclick="random()">Ejecutar el ejercicio</button>
+
+<script>
+function random() {
+    
+document.getElementById("mostra_ejer2").innerHTML = "El numero aleatorio es: "  + Math.floor(Math.random() * 11);
+}
+
+
+</script>
+
+
+
+                <!-- Ejercicio 3 -->
+                <h4>
+                        Escribe un programa que pida por control de texto una frase y si es mas largo de 10 carácteres,
+                        extrae los últimos 5 y muestralos en pantalla.
+                </h4>
+                <p>
+                        <label for="introduce_frase"><b>Introduce una frase</b></label>
+                        <input class="" type="text" id="input_frase">
+                </p>
+                <div class="" id="mostra_ejer3"></div>
+
+                <button class="" id="btn_ejer3" onclick="ejecutarEjercicio()"  > Ejecutar el ejercicio</button>
+
+<script>
+function ejecutarEjercicio() {
+        let inputFrase = document.getElementById("input_frase").value;
+let  outputDiv = document.getElementById("mostra_ejer3");
+
+if (inputFrase.length  > 10) {
+        let ultimoCinco = inputFrase.slice(-5);
+        outputDiv.innerHTML = "los ultimos 5 caracteres son:" + ultimoCinco;
+        
+} else {
+        outputDiv.innerHTML = "La frase es más corta que 11 caracteres";
+  }
+
+}
+
+</script>
+
+
+
+                <!-- Ejercicio 4 -->
+                <h4>Selecciona un color de fondo:</h4>
+    <select id="colores">
+        <option value="white">Blanco</option>
+        <option value="red">Rojo</option>
+        <option value="green">Verde</option>
+        <option value="blue">Azul</option>
+    </select>
+    <button onclick="cambiarColor()">Cambiar Color</button>
+    <p id="salidaselect"></p>
+
+    <script>
+function cambiarColor() {
+        let select =  document.getElementById("colores");
+        let colorElegido = select.value;
+        document.bgColor = colorElegido;
+}
+
+
+    </script>
+
+                <!-- Ejercicio 5 -->
+                <h4>Escribe un HTML que permita abrir desde un botón una ventana controlada desde JavaScript, con un botón para cerrarla.</h4>
+                <p>
+                    <label for="input_texto_ventana"><b>Introduce un texto para la nueva ventana</b></label>
+                    <input type="text" id="input_texto_ventana">
+                </p>
+                <div id="mostra_ejer5"></div>
+                <button id="btn_ejer5" onclick="abrirVentana()">Ejecutar el ejercicio</button>
+            
+                <script>
+                        function abrirVentana() {
+                          
+                          var texto = document.getElementById("input_texto_ventana").value;
+
+                          var ventana = window.open("", "Ventana", "width=500,height=300");
+                    
+                          ventana.document.body.innerHTML = texto;
+                    
+                          var botonCerrar = document.createElement("button");
+                          botonCerrar.textContent = "Cerrar";
+                          botonCerrar.onclick = function() {
+                            ventana.close();
+                          };
+                          ventana.document.body.appendChild(botonCerrar);
+                        }
+                      </script>
+
+
+
+                <!-- Ejercicio 6 -->
+                <h4>
+                        Haz un programa que te permita desde un botón, encender o apagar una imagen de una bombilla
+                        según los gif’s dados.
+                </h4>
+                <div style="text-align: center;">
+                        <div >
+                            <img id="lampara" src="/img/apagada.gif" alt="imagen de lampara">
+                        </div>
+                        <button id="btn" onclick="EncenderApagar()">Encender/Apagar lampara</button>
+                        
+                    
+                    
+                      </div>  
+
+                <script>
+                        function EncenderApagar() {
+                            const lampara = document.getElementById("lampara");
+                            const estado = lampara.getAttribute("src");
+                    
+                    if (estado === "img/apagada.gif") {
+                        lampara.setAttribute("src","img/encendida.gif");
+                        
+                    } else {
+                    lampara.setAttribute("src","img/apagada.gif");
+                    
+                        }
+                    }
+                                     
+                    </script>
+
+                <!-- Ejercicio 7 -->
+                <h4>
+                        Escribe un html que pida por un input de texto, un texto, guárdalo como un objeto String y que
+                        nos permita saber el número de caracteres escritos, que nos permita re- escribirlo en cursiva,
+                        en negrita, en color rojo, a un tamaño muy grande, y finalmente tachado.
+                </h4>
+                <p>
+                        <label class=""><b>Introduce un texto para formatearlo</b></label>
+                        <input class="" type="text" id="input_texto_formateo">
+                </p>
+                <div class="" id="mostra_ejer7"></div>
+                <button class="" id="btn_ejer7">Ejecutar el ejercicio</button>
+
+
+                <script>
+                        document.getElementById("btn_ejer7").addEventListener("click", function() {
+                            var texto = document.getElementById("input_texto_formateo").value;
+                            var resultado = document.getElementById("mostra_ejer7");
+                
+                           
+                            var caracteres = texto.length;
+                
+                           
+                            var textoCursiva = "<i>" + texto + "</i>";
+                            var textoNegrita = "<strong>" + texto + "</strong>";
+                            var textoRojo = "<span style='color: red;'>" + texto + "</span>";
+                            var textoGrande = "<span style='font-size: 24px;'>" + texto + "</span>";
+                            var textoTachado = "<s>" + texto + "</s>";
+                
+                            
+                            resultado.innerHTML = "Caracteres escritos: " + caracteres + "<br><br>";
+                            resultado.innerHTML += "Texto en cursiva: " + textoCursiva + "<br>";
+                            resultado.innerHTML += "Texto en negrita: " + textoNegrita + "<br>";
+                            resultado.innerHTML += "Texto en color rojo: " + textoRojo + "<br>";
+                            resultado.innerHTML += "Texto en tamaño grande: " + textoGrande + "<br>";
+                            resultado.innerHTML += "Texto tachado: " + textoTachado;
+                        });
+                    </script>
+
+                <!-- Ejercicio 8 -->
+                <h4>
+                        Escribe un programa que permita escribir una tabla con cuatro celdas (dos filas y dos columnas),
+                        con bordes colapsados y un texto en cada celda.
+                </h4>
+                <p>
+                        <label class=""><b>Introduce el número de Filas</b></label>
+                        <input class="" type="text" id="input_filas">
+                </p>
+                <p>
+                        <label class=""><b>Introduce el número de Columnas</b></label>
+                        <input class="" type="text" id="input_columnas">
+                </p>
+                <div class="" id="mostra_ejer8"></div>
+                <button class="" id="btn_ejer8">Crear Tabla</button>
+                <button class="" id="btn_ejer8_borrar" style="">Borrar Tabla</button>
+                
+                <script>
+                        document.getElementById("btn_ejer8").addEventListener("click", function() {
+                            // Obtener el número de filas y columnas ingresado por el usuario
+                            var numRows = parseInt(document.getElementById("input_filas").value);
+                            var numCols = parseInt(document.getElementById("input_columnas").value);
+                
+                            // Crear una tabla con las filas y columnas especificadas
+                            var table = "<table>";
+                            for (var i = 0; i < numRows; i++) {
+                                table += "<tr>";
+                                for (var j = 0; j < numCols; j++) {
+                                    table += "<td>Celda " + (i * numCols + j + 1) + "</td>";
+                                }
+                                table += "</tr>";
+                            }
+                            table += "</table>";
+                
+                            // Mostrar la tabla en el div "mostra_ejer8"
+                            document.getElementById("mostra_ejer8").innerHTML = table;
+                        });
+                
+                        document.getElementById("btn_ejer8_borrar").addEventListener("click", function() {
+                            // Borrar la tabla
+                            document.getElementById("mostra_ejer8").innerHTML = "";
+                        });
+                    </script>
+
+
+                <!-- Ejercicio 9 -->
+                <h4>
+                        Crea un programa que permita saber en milisegundos cuando acabó el mundo según el calendario
+                        Maya, recoge además el día, mes, año, hora, minutos, segundos actuales y día de la semana.
+                </h4>
+                <div class="" id="mostra_ejer9"></div>
+<button class="" id="btn_ejer9" onclick="calcularFechaMaya()">Ejecutar el ejercicio</button>
+
+<script>
+        function calcularFechaMaya() {
+            var fechaFinMundoMaya = 1569716400000; 
+            var fechaActual = Date.now();
+            var diferenciaMilisegundos = fechaFinMundoMaya - fechaActual; 
+    
+            var fecha = new Date(fechaActual); 
+            var dia = fecha.getDate(); 
+            var mes = fecha.getMonth() + 1; 
+            var anio = fecha.getFullYear();
+            var hora = fecha.getHours(); 
+            var minutos = fecha.getMinutes(); 
+            var segundos = fecha.getSeconds();
+            var diaSemana = fecha.getDay(); 
+    
+            var result = "Día: " + dia + "<br>Mes: " + mes + "<br>Año: " + anio + "<br>Hora: " + hora + "<br>Minutos: " + minutos + "<br>Segundos: " + segundos + "<br>Día de la semana: " + diaSemana + "<br>";
+            result += "Milisegundos restantes para el fin del mundo Maya: " + diferenciaMilisegundos;
+    
+            document.getElementById("mostra_ejer9").innerHTML = result; 
+        }
+    </script>
+        <!-- Ejercicio 10 -->
+        <h4>
+                Haz un programa que te permita entrar con un control de texto la base de un triángulo, luego la
+                altura en otro, y muestra su área en pantalla. Crea también un boton para ejecutar el cálculo
+                y otro para borrar los datos y el resultado.
+        </h4>
+        <p>
+                <label class=""><b>Introduce la Base del Triángulo</b></label>
+                <input class="" type="text" id="input_base">
+        </p>
+        <p>
+                <label class=""><b>Introduce la Altura del Triángulo</b></label>
+                <input class="" type="text" id="input_altura">
+        </p>
+        <div class="" id="mostra_ejer10"></div>
+        <button onclick="calcularArea()">Ejecutar el ejercicio </button>
+        <button onclick="borrarDatos()">Borrar Datos</button>
+
+        </div>
+        <script>
+                function calcularArea() {
+                    // Obtener los valores de base y altura
+                    var base = parseFloat(document.getElementById("input_base").value);
+                    var altura = parseFloat(document.getElementById("input_altura").value);
+        
+                    // Validar que los valores sean números válidos
+                    if (isNaN(base) || isNaN(altura)) {
+                        document.getElementById("mostra_ejer10").innerHTML = "Por favor, ingresa números válidos.";
+                    } else {
+                        // Calcular el área del triángulo
+                        var area = (base * altura) / 2;
+        
+                        // Mostrar el resultado en pantalla
+                        document.getElementById("mostra_ejer10").innerHTML = "El área del triángulo es: " + area;
+                    }
+                }
+        
+                function borrarDatos() {
+                    // Limpiar los campos de entrada y el resultado
+                    document.getElementById("input_base").value = "";
+                    document.getElementById("input_altura").value = "";
+                    document.getElementById("mostra_ejer10").innerHTML = "";
+                }
+            </script>
+
+        <script src=""></script>
+</body>
+
+</html>
