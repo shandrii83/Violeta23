@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muestra</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userDataModal">
+        Ver Datos
+    </button>
+    <div class="modal fade" id="userDataModal" tabindex="-1" role="dialog" aria-labelledby="userDataModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userDataModalLabel">Datos del Usuario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="userDataContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Informacion recibida</h2>
+    <ul id="userDataList"></ul>
+    <!-- <div id="userDataContainer"></div> -->
+
+    <script src="muestra.js"></script>
+</body>
+
+</html>
