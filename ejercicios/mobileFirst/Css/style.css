@@ -1,0 +1,196 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.nav {
+    text-align: center;
+    background-color: rgb(43, 21, 241);
+    color: #fff;
+  
+ 
+  
+
+}
+
+/* .header {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 25px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}  */
+ 
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
+.header {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 25px;
+}
+
+.main {
+    background-color: rgb(140, 90, 233);
+    padding: 20px;
+   height: 100lvh;
+  /*  text-align: center; */
+}
+.main h1{
+    text-align: center;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+label, input, textarea {
+    display: block;
+    margin-bottom: 10px;
+}
+
+textarea{
+    height: 150px;
+}
+input, textarea {
+    width: 100%;
+    padding: 5px;
+}
+
+#limpiar, #enviar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+
+    
+}
+
+#limpiar:hover, #enviar:hover {
+    background-color: #555;
+}
+
+.aside {
+    background-color: #eee;
+    padding: 10px;
+    text-align: center;
+
+    
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    height: 100px;
+    display: flex;
+   align-items: center;
+   justify-content: center;
+   
+}
+.footer p{
+    margin: 0;
+}
+
+.r {
+    color: aqua;
+}
+
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   height: 100px;
+    margin: 0;
+    background-color: rgb(25, 179, 151);
+}
+
+header h1 {
+    text-align: center;
+}
+
+
+@media (min-width: 768px) {
+
+    
+    .nav, .header, .aside, .footer {
+        position: fixed;
+    }
+
+    .nav {
+        top: 0;
+        left: 0;
+bottom: 0;
+display: flex;
+align-items: center;
+z-index: 3;
+width: 100px;
+    }
+
+    
+    .nav li{
+display: flex;
+justify-content: space-around;
+
+      
+
+    }
+
+    .header {
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+      
+        
+    }
+
+    .main {
+      
+       margin-inline: 100px;
+       
+    }
+
+    .aside {
+        margin: 0;
+        padding: 0;
+        top: 100px;
+        right: 0;
+        bottom: 100px;
+        z-index: 2;
+width: 100px;
+    }
+
+    .footer {
+        left: 50px;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        height: 100px;
+      
+    }
+
+}
