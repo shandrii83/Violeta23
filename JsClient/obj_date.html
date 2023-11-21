@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>obj_Date</title>
+</head>
+<body>
+    <button onclick="openDialog()">Open</button>
+    <dialog>
+        <p></p>
+        <button onclick="closeDialog()">Close</button>
+    </dialog>
+
+
+
+    <script>
+        function openDialog() {
+            const dialog = document.querySelector('dialog');
+            dialog.showModal();
+
+            const dateDisplay = dialog.querySelector('p');
+
+            setInterval(function() {
+            const fecha = new Date();
+            dateDisplay.textContent = `${fecha.getFullYear()} - ${fecha.getMonth() + 1} - ${fecha.getDate()} - ${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`;
+        }, 1000);
+
+      
+    }
+
+        function closeDialog() {
+            const dialog = document.querySelector('dialog');
+            dialog.close();
+        }
+    </script>
+   
+
+
+
+</body>
+</html>

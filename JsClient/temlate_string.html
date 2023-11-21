@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template String</title>
+</head>
+
+<body>
+
+    <div id="mostra"></div>
+    <button id="abre">Rellena</button>
+    <script>
+        const abrir = document.getElementById('abre');
+        const abro = function abriendo() {
+            const primavera = "Primavera";
+            const verano = "verano ";
+            const otono = "otono ";
+            const invierno = "invierno ";
+            const estaciones =
+            `<ul  >
+<li >${primavera}</li>
+    <li>${verano}</li>
+    <li>${otono}</li>
+    <li>${invierno}</li>
+   
+    </ul>`;
+        
+
+        const muestra = document.getElementById('mostra');
+        muestra.innerHTML = estaciones;
+}
+        abrir.onclick = abro;
+
+
+        /* abrir.onclick = ()=>{
+            const primavera = "Primavera";
+            const verano = "verano ";
+            const otono = "otono ";
+            const invierno = "invierno ";
+            const estaciones =
+            `<ul  >
+<li >${primavera}</li>
+    <li>${verano}</li>
+    <li>${otono}</li>
+    <li>${invierno}</li>
+   
+    </ul>`;
+        
+
+        const muestra = document.getElementById('mostra');
+        muestra.innerHTML = estaciones;
+        }; */
+    </script>
+   
+</body>
+
+</html>

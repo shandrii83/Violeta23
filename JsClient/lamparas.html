@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamparas</title>
+</head>
+<body>
+  <div style="text-align: center;">
+    <div >
+        <img id="lampara" src="img/apagada.gif" alt="imagen de lampara">
+    </div>
+    <button id="btn" onclick="EncenderApagar()">Encender/Apagar lampara</button>
+    
+
+
+  </div>  
+
+<script>
+    function EncenderApagar() {
+        const lampara = document.getElementById("lampara");
+        const estado = lampara.getAttribute("src");
+
+if (estado === "img/apagada.gif") {
+    lampara.setAttribute("src","img/encendida.gif");
+    
+} else {
+lampara.setAttribute("src","img/apagada.gif");
+
+    }
+}
+ 
+
+
+
+</script>
+
+
+
+</body>
+</html>
