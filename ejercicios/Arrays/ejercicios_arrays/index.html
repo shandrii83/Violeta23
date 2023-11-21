@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicios_arrays</title>
+</head>
+<body>
+
+<!--  5. Crea un programa que nos permita recoger un array con los meses del año ya realizado y lo mostramos:
+
+ a- En su orden real
+    b- En orden alfabético
+    c- Separado con guiones
+    d- Orden inverso
+    e- Separado con otro carácter que tu decidas. -->
+
+<script>
+function juegoDeMeses() {
+
+
+    let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+// En su orden real
+
+console.log(meses);
+
+// En orden alfabético
+
+let mesesAlfabeticos = meses.slice().sort();
+console.log(mesesAlfabeticos);
+
+// Separados con guiones
+
+let mesesSeparadosGuiones = meses.join("-");
+console.log(mesesSeparadosGuiones);
+
+// Orden inverso
+
+let mesesInverso = meses.slice().reverse();
+console.log(mesesInverso);
+
+// Separados con '+')
+
+let mesesSeparadosOtro = meses.join("+");
+console.log(mesesSeparadosOtro);
+
+document.getElementById("result1").innerText = meses;
+document.getElementById("result2").innerText = mesesAlfabeticos;
+document.getElementById("result3").innerText = mesesSeparadosGuiones;
+document.getElementById("result4").innerText = mesesInverso;
+document.getElementById("result5").innerText = mesesSeparadosOtro;
+}
+
+
+
+</script>
+<div class="meses">Resultado: <p id="result1"></p></div>
+<div class="meses">Resultado: <p id="result2"></p></div>
+<div class="meses">Resultado: <p id="result3"></p></div>
+<div class="meses">Resultado: <p id="result4"></p></div>
+<div class="meses">Resultado: <p id="result5"></p></div>
+<button onclick="juegoDeMeses()">Recorrer un array de meses!</button>
+
+
+
+<!-- 6. Crea un nuevo documento HTML que nos imprima en la página un listado de los códigos de un producto inventado… “codigo_producto 0 , codigo_producto 1……
+ -->
+
+ <h1>Listado de Códigos de Producto</h1>
+
+<ul id="lista-codigos"></ul>
+<button onclick="listadoDeCodigos()">Listado de Códigos de Producto</button>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const totalCodigos = 10;
+        const listaCodigos = document.getElementById('lista-codigos');
+
+        // Declare the function globally
+        window.listadoDeCodigos = function () {
+            for (let i = 0; i < totalCodigos; i++) {
+                const codigoProducto = document.createElement('li');
+                codigoProducto.textContent = `codigo_producto ${i}`;
+                listaCodigos.appendChild(codigoProducto);
+            }
+        };
+    });
+</script>
+
+
+</body>
+</html>

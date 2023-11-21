@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodos de Arrays en JavaScript</title>
+</head>
+<body>
+    
+    <script>
+const hombres = [ 
+    "Pablo", "Jose"];
+    console.log(hombres);
+    const mujeres = [ 
+    "licia", "Gemma", "Zelda"];
+    console.log(mujeres);
+    hombres.push("Pepe");
+console.log(hombres);
+mujeres.push("Pepa");
+console.log(mujeres);
+
+const humanes= mujeres.concat(hombres);
+console.log(humanes);
+
+const humanis =mujeres+hombres;
+console.log(humanis);
+
+const homers =hombres.concat();
+console.log(homers);
+
+const extraidos = humanes.slice(2,5);
+console.log(extraidos);
+console.log(humanes);
+const sort = humanes.sort();
+console.log(humanes);
+
+humanes[1] = "Franco";
+console.log(humanes);
+console.log(humanes[4]);
+
+
+//Clonar on arrary con SPEAD
+
+const objeto={
+    "nombre": "Pepe",
+    "edad": "30",
+    "apellido": "Poponez"
+};
+const nuevodeFabrica ={...objeto};
+console.log(nuevodeFabrica);
+
+//Clonar un array o objeto con CLONE
+
+const otroClon=structuredClone(nuevodeFabrica);
+console.log(otroClon);
+
+ 
+ const pruebaSpread={
+    nombre: "Pepe",
+    edad: "30",
+    ...humanes
+
+}
+console.log(pruebaSpread); 
+
+
+
+//forEach, Map, Filter
+const numbers = [45, 4, 9, 16, 25];
+
+numbers.forEach((elem) => (
+    console.log(elem * 3)
+));
+
+
+    const porCinco = [1, 2, 3, 4, 5,6];
+    const mapeado = porCinco.map((elem) => elem * 5);
+    console.log(mapeado);
+
+    const filtrado = mapeado.filter(elem => elem %2  === 0);
+
+console.log(filtrado);
+</script>
+
+
+</body>
+</html>

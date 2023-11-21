@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduccion a las Arrays</title>
+</head>
+<body>
+    <button   onclick="recorrerArray()">Recorrer</button>
+    <button   onclick="recorroObjeto()">Recorrer</button>
+<script>
+/* let primerArray =  new Array(6);
+primerArray[0]= 100;
+primerArray[1]= 200;
+primerArray[2]= 300;
+primerArray[3]= 400;
+primerArray[4]= 500;
+primerArray[5]= 600; */
+
+
+let primerArray = [100,200,300,400,500,600];
+ 
+console.log(primerArray); 
+document.write(`${primerArray} <br/>  ` );
+
+
+function recorrerArray() {
+    let recorrer = [10, "20", false, "texto", 50, 60];
+    console.time(`for`);
+
+  
+    for (let i = 0; i < recorrer.length; i++) {
+        console.log(`indice: ${i} :: Valor: ${recorrer[i]}`);
+    }
+    console.timeEnd(`for`);
+
+
+
+
+    console.time(`forin`);
+
+for (let x in recorrer) {
+    console.log(`indice: ${x} :: Valor: ${recorrer[x]}`);
+document.write(`indice: ${x} :: Valor: ${recorrer[x]} <br>  ` );
+}
+console.timeEnd(`forin`);
+
+
+}
+
+function recorroObjeto() {
+  let extraterrestre = {
+    nombre: "ALF",
+    consigna: "Zumo de Gato",
+    vidas: "muchas",
+    edad: 200
+  }
+  console.time(`extraterrestre`);
+  for (let propiedad in extraterrestre) {
+    console.log(propiedad + ": " + extraterrestre[propiedad]);
+    document.write(`Propiedad: ${propiedad} :: Valor: ${extraterrestre[propiedad]} <br>`);
+  }
+  console.timeEnd(`extraterrestre`);
+}
+
+
+
+
+let alf = ["ALF", "Zumo de Gato", "muchas", 200];
+
+console.time("recorroArray");
+for (let x of alf) {
+  console.log(`Element: ${x}`);
+  document.write(`Element: ${x} <br>`);
+}
+console.timeEnd("recorroArray");
+
+
+
+
+alert(alf[2]); 
+
+
+
+
+console.time("recorroForEach");
+alf.forEach(element => {
+  console.log(`Element: ${element}`);
+  document.write(`Element: ${element} <br>`);
+});
+console.timeEnd("recorroForEach");
+ 
+ 
+function recorrerForEach() {
+  let extraterrestre = {
+    nombre: "ALF",
+    consigna: "Zumo de Gato",
+    vidas: "muchas",
+    edad: 300
+  }
+
+  Object.entries(extraterrestre).forEach(([index, element]) => {
+    console.log(`Índice: ${index} :: Valor: ${element}`);
+    document.write(`Propiedad: ${index} :: Valor: ${element} <br>`);
+  });
+}
+
+
+
+function objForEach() {
+  let personas = [{
+    nombre: "Pedro",
+    apellido: "Gomes",
+    edad: 25,
+    boleano: true,
+    array: [1, 2, 2, "tres"]
+  }];
+
+  personas.forEach(elem => {
+    document.write(`Persona ${elem.nombre} ${elem.apellido} ${elem.edad} ${elem.boleano} ${elem.array} <br>`);
+  });
+
+  let alf = [{
+    nombre: "ALF",
+    consigna: "Zumo de Gato",
+    tercerIndice: "otrovalor" 
+  }];
+
+  alf.forEach(elem => {
+    document.write(`Extraterrestre: ${elem.nombre} :: Valor: ${elem.consigna}, ${elem.tercerIndice}<br>`);
+  });
+
+  const carrito = [
+    { nombre: "Monitor 20 pulgadas", precio: 500 },
+    { nombre: "Televizion 50 pulgadas", precio: 500 },
+    { nombre: "tablet", precio: 300 },
+    { nombre: "Auriculares", precio: 200 },
+    { nombre: "Teclado", precio: 50 },
+    { nombre: "Movil", precio: 500 },
+  ];
+
+  const nuevoArray = carrito.map(producto => `Articulo: ${producto.nombre} Precio: ${producto.precio}`);
+
+  console.log(nuevoArray);
+
+  const nuevoArray2 = carrito.forEach(elem => (document.write(
+  `Articulo: ${elem.nombre} Precio: ${elem.precio}`
+)))
+
+}
+
+// Call the function
+objForEach();
+
+
+
+
+</script>
+<button onclick="recorrerForEach()">qwerty</button>
+<button onclick="objForEach()">objForEach</button>
+
+</body>
+</html>
