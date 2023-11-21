@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="responstyle.css">
+    <title>Ejercicio Responsive</title>
+</head>
+<style>
+    header{
+        text-align: center;
+    }
+body{
+     background-image: url(/img/bg.png);
+    
+}
+article{
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+article a{
+    color: white;
+    justify-content: center;
+    width: 170px;
+ background-position: center;
+    text-decoration: none;
+    height: 170px;
+
+    background-image: url(/img/bgButton.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+/*   max-width: 100%; */
+/* padding-top: 20px; */
+}
+
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+</style>
+<body>
+    <header >
+        <img src="/img/logoWorkMobile.png" alt="">
+    </header>
+    <main>
+        <article>
+            <a href=""><img src="/img/icoNotas.png" alt="">Notas</a>
+        </article>
+
+        <article>
+            <a href="">
+                <img src="/img/icoPartes.png" alt="">
+                Partes
+            </a>
+        </article>
+
+        <article>
+            <a href="">
+                <img src="/img/icoAcciones.png" alt="">
+                Acciones Comerciales
+            </a>
+        </article>
+        <article>
+            <a href="">
+                <img src="/img/icoIncidencias.png" alt="">
+                Incidencias
+            </a>
+        </article>
+
+    </main>
+
+
+</body>
+
+</html>
