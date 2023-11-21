@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <div  class="muestra">  </div>
+
+    <!--  <button class="btn">Monstar saludo</button>
+ 
+ <div class="mostra"></div>
+  -->
+ 
+ 
+ <script>
+ 
+ 
+ let num_1=prompt("Introduce un multiplio de 10 para encontrarlo con switch");
+ let result;
+ 
+ switch( Number(num_1) ){ //valor a comparar
+ case 10:
+
+
+ result= "la variable vale 10";
+ break;
+
+ case 20:
+ result="la variable  vale 20";
+ break;
+
+ case 30:
+ result= " la variable vale 30";
+ break;
+
+ default:
+  result= " la variable  no es ninguno de los valores  esparadas";
+ }
+ 
+ 
+ console.log(result);
+ const muestra  = document.querySelector(".muestra");
+muestra.innerHTML = result; 
+
+ </script>
+ 
+ 
+ 
+     <script src="/js/script.js"></script>
+
+
+
+
+   
+</body>
+</html>

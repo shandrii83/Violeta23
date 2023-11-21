@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numero_mayor</title>
+</head>
+<body>
+ 
+    <script>
+
+let numero;
+
+do {
+  numero = prompt("Introduce el número 50 o mayor");
+
+  if (numero !== null) {
+    numero = parseInt(numero); // Convert the input to an integer.
+  }
+
+  if (isNaN(numero) || numero < 50) {
+    console.log("El número es menor que 50 o no es un número válido. Prueba otra vez.");
+  }
+} while (isNaN(numero) || numero < 50);
+
+console.log("El número es: " + numero);
+
+    </script>
+
+
+</body>
+</html>

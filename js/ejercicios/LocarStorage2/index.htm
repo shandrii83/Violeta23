@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        small {
+            color: #6c757d;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+        #error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Contacta con nosotros</h1>
+        <form method="post" id="firstContact" name="firstContact" action="envio.php" onsubmit="return validateForm()">
+            <fieldset class="form-group">
+                <label for="email">Dirección de email</label>
+                <input type="text" class="form-control" id="email" name="email" value="">
+                <small id="mostra1" class="text-muted"></small>
+                <div id="emailError" class="error-message"></div>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="dniNie">DNI/NIE</label>
+                <input type="text" class="form-control" id="dniNie" name="dniNie" value="">
+                <small id="mostra5" class="text-muted"></small>
+                <div id="dniNieError" class="error-message"></div>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="asunto">Asunto</label>
+                <input type="text" class="form-control" id="asunto" name="asunto" value="">
+                <small id="mostra2" class="text-muted"></small>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="miedad">Fecha de nacimiento:</label>
+                <input type="date" id="miedad" name="miedad" class="form-control" value="">
+                <small id="mostra4" class="text-muted"></small>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="contenido">¿Qué te gustaría preguntarnos?</label>
+                <textarea class="form-control" id="contenido" name="contenido" rows="3" value=""></textarea>
+                <small id="mostra3" class="text-muted"></small>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="acepto">Acepto las condiciones del servicio</label>
+                <input type="checkbox" name="acepto" id="check" />
+                <small id="mostra6" class="text-muted"></small>
+            </fieldset>
+
+            <div id="error"></div>
+            <button type="submit" name="enviar" id="enviar" class="btn btn-primary">Enviar</button>
+            <button type="button" name="borrar" id="borrar" class="btn btn-secondary" onclick="resetForm()">Borrar
+                formulario</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var email = document.getElementById('email').value;
+            var dniNie = document.getElementById('dniNie').value;
+            var asunto = document.getElementById('asunto').value;
+            var miedad = document.getElementById('miedad').value;
+            var contenido = document.getElementById('contenido').value;
+            var acepto = document.getElementById('check').checked;
+
+            if (!isValidEmail(email)) {
+                document.getElementById('emailError').innerHTML = 'Por favor, introduce un email válido.';
+                return false;
+            } else {
+                document.getElementById('emailError').innerHTML = '';
+            }
+
+            if (!isValidDNIorNIE(dniNie)) {
+                document.getElementById('dniNieError').innerHTML = 'Por favor, introduce un DNI o NIE válido.';
+                return false;
+            } else {
+                document.getElementById('dniNieError').innerHTML = '';
+            }
+
+            if (asunto.trim() === '') {
+                document.getElementById('mostra2').innerHTML = 'Por favor, completa este campo.';
+                return false;
+            } else {
+                document.getElementById('mostra2').innerHTML = '';
+            }
+
+            // Добавьте дополнительные проверки для других полей при необходимости
+
+            if (miedad === '') {
+                document.getElementById
+                    ('mostra4').innerHTML =
+                    'Por favor, selecciona una fecha.';
+                return
+                false;
+            }
+            else {
+                document.getElementById('mostra4').innerHTML = '';
+            }
+
+            if (contenido.trim() === '') {
+                document.getElementById('mostra3').innerHTML = 'Por favor, completa este campo.';
+                return false;
+            } else {
+                document.getElementById('mostra3').innerHTML = '';
+            }
+
+            if (!acepto) {
+                document.getElementById
+
+                    ('mostra6').
+
+                    innerHTML = 'Debes aceptar las condiciones del servicio.';
+                return false;
+            } else {
+                document.
+                    getElementById('mostra6').innerHTML = '';
+            }
+
+            return true;
+        }
+
+        function isValidEmail(email) {
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidDNIorNIE(dniNie) {
+            var dniRegex = /^\d{8}[a-zA-Z]$/;
+            var nieRegex = /^[XYZxyz]\d{7}[a-zA-Z]$/;
+            return dniRegex.test(dniNie) || nieRegex.test(dniNie);
+        }
+
+        function resetForm() {
+            document.getElementById('firstContact').reset();
+        }
+    </script>
+    <script src="/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
