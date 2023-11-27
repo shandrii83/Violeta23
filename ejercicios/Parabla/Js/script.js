@@ -89,11 +89,11 @@ let letrasIncorrectas = [];
 // Inicialización
 document.getElementById('word-display').innerText = mostrarPalabra();
 
-// Función para mostrar la palabra
+//creamos función para mostrar la palabra
 function mostrarPalabra() {
     let display = "";
     let letterBoxes = document.getElementById('letter-boxes');
-    letterBoxes.innerHTML = ''; // Clear previous letter boxes
+    letterBoxes.innerHTML = ''; // Limpiamos letter boxes
 
     let palabraInfo = palabras.find(item => item.palabra.toUpperCase() === palabraActual);
 
@@ -104,7 +104,7 @@ function mostrarPalabra() {
         } else {
             display += "_ ";
         }
-        // Add a letter box for the current letter if it is guessed
+        //Añadimos un recuadro para la letra actual si se adivina
         if (isGuessed) {
             letterBoxes.innerHTML += `<div class="letter-box">${letra}</div>`;
         } else {
@@ -127,6 +127,14 @@ function mostrarPalabra() {
 }
 
 
+function showAlert(message) {
+    document.getElementById('alert-message').innerText = message;
+    document.getElementById('alert-container').style.display = 'flex';
+}
+
+function dismissAlert() {
+    document.getElementById('alert-container').style.display = 'none';
+}
 // Función para verificar la letra
 function verificarLetra(letra) {
     if (palabraActual.includes(letra)) {
@@ -140,14 +148,20 @@ function verificarLetra(letra) {
 
         // Verificar si ha perdido
         if (intentosRestantes === 0) {
-            alert("¡Has perdido! La palabra correcta es: " + palabraActual);
+            showAlert("¡Has perdido! La palabra correcta es: " + palabraActual);
+
+
+
+            /* alert("¡Has perdido! La palabra correcta es: " + palabraActual); */
             reiniciarJuego();
         }
     }
 
     // Verificar si ha ganado
     if (letrasAdivinadas.length === palabraActual.length) {
-        alert("¡Felicidades! ¡Has adivinado la palabra!");
+
+        showAlert("¡Felicidades! ¡Has adivinado la palabra!");
+        /* alert("¡Felicidades! ¡Has adivinado la palabra!"); */
         reiniciarJuego();
     }
 

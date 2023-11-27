@@ -24,7 +24,8 @@ body {
     padding: 10px;
     border-radius: 5px;
     width: 80%;
-    height: 60lvh;
+    height: max-content;
+    overflow: hidden;
 }
 
 .game-container {
@@ -35,6 +36,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    overflow: auto;
 }
 
 #word-display,
@@ -53,6 +55,7 @@ body {
 
 #wrong-letters {
     margin-top: 20px;
+
 }
 
 #remaining-attempts {
@@ -63,11 +66,54 @@ body {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: 1px solid #000;
+    border: 1px solid rgb(109, 38, 109);
     border-radius: 5px;
     background-color: #fff;
     text-align: center;
     margin: 0 5px;
     font-size: 16px;
     line-height: 30px;
+
+}
+
+
+.alert-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* semi-transparent background */
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* box shadow for a subtle lift effect */
+    text-align: center;
+    border-color: blueviolet;
+}
+
+.reiniciar {
+    background-color: rgb(109, 38, 109);
+    color: #fff;
+    max-width: 50%;
+    align-self: flex-end;
+    border-radius: 5px;
+    outline-color: burlywood;
+    outline-style: groove;
+    margin-right: 1rem;
+    text-wrap: wrap;
+}
+
+.hr {
+    color: rgb(109, 38, 109);
+    width: 90%;
+    border: solid 1px;
 }

@@ -17,21 +17,29 @@
 
 
                 <div id="word-display"></div>
-                <div id="letter-boxes"></div>
+                <div id="letter-boxes">
+
+                </div>
+                <hr class="hr">
                 <div id="hint-display">Pregunta2:</div>
 
                 <div id="wrong-letters">Letras incorectas:</div>
                 <div id="remaining-attempts">Intentos restantes:</div>
 
                 <!--       <div id="hints">Pregunta:</div> -->
-
+                <input onclick=" reiniciarJuego();" type="button" class="reiniciar" value="Volver a empezar">
             </div>
 
 
         </div>
 
     </div>
-
+    <div class="alert-container" id="alert-container">
+        <div class="alert-box">
+            <p id="alert-message"></p>
+            <button onclick="dismissAlert()">OK</button>
+        </div>
+    </div>
 
     <script src="/Js/script.js"></script>
 </body>
