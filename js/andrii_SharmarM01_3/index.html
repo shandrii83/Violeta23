@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Css/style.css">
+    <script src="https://kit.fontawesome.com/5313ad41f2.js" crossorigin="anonymous"></script>
+    <title>Juego de Adivinanza</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Juego de Adivinanza
+            <span class="fa fa-adjust" style="font-size:24px" onclick="toggleContrast()"> </span>
+            <div>
+                <button onclick="increaseFontSize()">Aumentar tamaño</button>
+                <button onclick="decreaseFontSize()">Reducir tamaño</button>
+            </div>
+        </h1>
+
+        <div id="nombreDelUsuario">
+            <label for="playerName">Antes de empezar, por favor, dinos tu nombre:</label><br>
+            <input type="text" id="playerName" placeholder="Ingresa tu nombre">
+            <br>
+            <button onclick="startGame()">Comenzar Juego</button>
+        </div>
+
+        <div id="gameArea">
+            <section id="gameSection1">
+                <p>Bienvenido, <span id="outputPlayerName1"></span>! El juego consiste en lo siguiente: tendrás que
+                    indicarnos
+                    un número de 1 a 10 y después otro del 30 al 40. Entonces, la máquina seleccionará, de manera
+                    aleatoria,
+                    otro dentro del rango comprendido entre las dos cifras que has designado. Tendrás 5 intentos para
+                    adivinarlo.
+                </p>
+                <label for="minNumber">Escribe un número entre 1 y 10:</label><br>
+                <input type="number" id="minNumber" placeholder="Ingresa el número menor"><br>
+                <label for="maxNumber">Escribe un número entre 30 y 40:</label><br>
+                <input type="number" id="maxNumber" placeholder="Ingresa el número mayor"><br>
+                <button onclick="generateNumberRange()">Jugar!</button>
+                <!-- <p id="numberRange"></p> -->
+                <p id="feedback1"></p>
+                <button onclick="resetGame()">Jugar de Nuevo</button>
+            </section>
+
+            <section id="gameSection2">
+                <div class="game-content">
+                    <p><span id="outputPlayerName2"></span>! El juego consiste en lo siguiente: tendrás que indicarnos
+                        un
+                        número de 1 a 10 y después otro del 30 al 40. Entonces, la máquina seleccionará, de manera
+                        aleatoria, otro dentro del rango comprendido entre las dos cifras que has designado. Tendrás 5
+                        intentos para adivinarlo.
+                    </p>
+                    <p id="numberRange"></p>
+                    <div id="numberButtons"></div>
+
+                    <!--  <input type="number" id="guess" onchange="checkGuess()"> -->
+                    <div id="hint"></div>
+                    <p id="feedback2"></p>
+                    <button onclick="resetGame()">Jugar de Nuevo</button>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    <script src="/Js/script.js"></script>
+</body>
+
+</html>
