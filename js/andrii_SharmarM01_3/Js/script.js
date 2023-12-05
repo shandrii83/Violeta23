@@ -23,6 +23,10 @@ function startGame() {
 }
 function initializeNumberButtons() {
     const numberButtonsContainer = document.getElementById("numberButtons");
+
+    // Clear the existing buttons
+    numberButtonsContainer.innerHTML = "";
+
     const min = parseInt(document.getElementById("minNumber").value);
     const max = parseInt(document.getElementById("maxNumber").value);
 
@@ -33,19 +37,33 @@ function initializeNumberButtons() {
 
         // Add a click event listener to each button
         numberButton.addEventListener("click", function () {
-            checkGuess(i); // Pass the selected number directly to checkGuess
+            highlightButton(this); // Pass the current button for highlighting
+            checkGuess(i); // Pass the selected number for checking
         });
 
         numberButtonsContainer.appendChild(numberButton);
     }
+
+    // Show the numberButtonsContainer after clearing and initializing
+    numberButtonsContainer.style.display = "block";
 }
+
+
+function highlightButton(button) {
+    // Удалить подсветку у всех кнопок
+    /*   const allButtons = document.querySelectorAll(".selectable-number");
+      allButtons.forEach((btn) => btn.classList.remove("selected")); */
+
+    // Подсветить выбранную кнопку
+    button.classList.add("selected");
+}
+
 
 function checkGuess(guess) {
     const feedback = document.getElementById("feedback2");
 
     if (guess === randomNum) {
         feedback.innerText = `¡Felicidades, ${playerName}! Has acertado el número.`;
-        document.getElementById("gameArea").style.display = "none";
     } else {
         attempts--;
 
@@ -54,7 +72,6 @@ function checkGuess(guess) {
             provideHint(guess);
         } else {
             feedback.innerText = `¡Lo siento, ${playerName}! Has agotado todos tus intentos. El número era ${randomNum}.`;
-            document.getElementById("gameArea").style.display = "none";
         }
     }
 }
@@ -76,11 +93,13 @@ function resetGame() {
     attempts = 5;
     document.getElementById("minNumber").value = "";
     document.getElementById("maxNumber").value = "";
-    document.getElementById("guess").value = "";
     document.getElementById("feedback2").innerText = "";
     document.getElementById("hint").innerText = "";
 
-    // Display the "gameSection2" section
+    // Скрыть "gameSection2" после сброса
+    document.getElementById("gameSection2").style.display = "none";
+
+    // Показать "gameSection1"
     document.getElementById("gameSection1").style.display = "block";
 }
 
@@ -120,6 +139,7 @@ function updateFontSize() {
         gameArea.style.fontSize = fontSize + 'px';
     }
 }
+
 function generateNumberRange() {
     minNumber = parseInt(document.getElementById("minNumber").value);
     maxNumber = parseInt(document.getElementById("maxNumber").value);
