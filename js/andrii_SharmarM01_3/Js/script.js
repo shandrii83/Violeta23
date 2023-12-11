@@ -3,28 +3,87 @@ let minNumber;
 let maxNumber;
 let randomNum;
 let attempts = 5;
+let minNumberConfirmed = false;
+let maxNumberConfirmed = false;
 
 function startGame() {
     playerName = document.getElementById("playerName").value;
+
+    if (/[0-9]/.test(playerName) || playerName.length < 3) {
+        document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, ingresa un nombre válido con al menos 3 letras y sin números.</p>";
+        return;
+    }
+
+    document.getElementById("errorMessage").innerHTML = "";
+
     document.getElementById("outputPlayerName1").innerText = playerName;
 
     const minInput = document.getElementById("minNumber");
     const maxInput = document.getElementById("maxNumber");
 
-    // Continue with the game setup
     document.getElementById("gameSection1").style.display = "block";
     document.getElementById("gameSection2").style.display = "none";
 
     document.getElementById("gameArea").style.display = "block";
     document.getElementById("nombreDelUsuario").style.display = "none";
 
-    // Call a function to initialize number buttons in "gameSection2"
     initializeNumberButtons();
+    document.getElementById("outputPlayerName2").innerText = playerName;
 }
+
+function confirmMinNumber() {
+    minNumber = parseInt(document.getElementById("minNumber").value);
+
+    if (isNaN(minNumber) || minNumber < 1 || minNumber > 10) {
+        document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, ingresa un número válido entre 1 y 10.</p>";
+        return;
+    }
+
+    document.getElementById("errorMessage").innerHTML = "";
+    minNumberConfirmed = true;
+    updateConfirmationButtons();
+}
+
+function confirmMaxNumber() {
+    maxNumber = parseInt(document.getElementById("maxNumber").value);
+
+    if (!minNumberConfirmed) {
+        document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, confirma el número mínimo antes de ingresar el máximo.</p>";
+        return;
+    }
+
+    if (isNaN(maxNumber) || maxNumber < 30 || maxNumber > 40) {
+        document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, ingresa un número válido entre 30 y 40.</p>";
+        return;
+    }
+
+    document.getElementById("errorMessage").innerHTML = "";
+    maxNumberConfirmed = true;
+    updateConfirmationButtons();
+}
+
+
+function updateConfirmationButtons() {
+    const confirmMinButton = document.getElementById("confirmMinButton");
+    const confirmMaxButton = document.getElementById("confirmMaxButton");
+    const playButton = document.getElementById("playButton");
+
+    if (!confirmMinButton || !confirmMaxButton || !playButton) {
+        console.error("One or more buttons not found.");
+        return;
+    }
+
+    confirmMinButton.disabled = minNumberConfirmed;
+    confirmMaxButton.disabled = maxNumberConfirmed;
+
+    if (minNumberConfirmed && maxNumberConfirmed) {
+        playButton.disabled = false;
+    }
+}
+
 function initializeNumberButtons() {
     const numberButtonsContainer = document.getElementById("numberButtons");
 
-    // Clear the existing buttons
     numberButtonsContainer.innerHTML = "";
 
     const min = parseInt(document.getElementById("minNumber").value);
@@ -35,47 +94,38 @@ function initializeNumberButtons() {
         numberButton.textContent = i;
         numberButton.classList.add("selectable-number");
 
-        // Add a click event listener to each button
         numberButton.addEventListener("click", function () {
-            highlightButton(this); // Pass the current button for highlighting
-            checkGuess(i); // Pass the selected number for checking
+            highlightButton(this);
+            checkGuess(i);
         });
 
         numberButtonsContainer.appendChild(numberButton);
     }
 
-    // Show the numberButtonsContainer after clearing and initializing
     numberButtonsContainer.style.display = "block";
 }
 
-
 function highlightButton(button) {
-    // Удалить подсветку у всех кнопок
-    /*   const allButtons = document.querySelectorAll(".selectable-number");
-      allButtons.forEach((btn) => btn.classList.remove("selected")); */
-
-    // Подсветить выбранную кнопку
     button.classList.add("selected");
 }
-
 
 function checkGuess(guess) {
     const feedback = document.getElementById("feedback2");
 
     if (guess === randomNum) {
-        feedback.innerText = `¡Felicidades, ${playerName}! Has acertado el número.`;
+        feedback.innerHTML = `<span style="color: green;">¡Felicidades, ${playerName}! Has acertado el número. El número era ${randomNum}.</span>`;
     } else {
         attempts--;
 
         if (attempts > 0) {
-            feedback.innerText = `Intento fallido. Te quedan ${attempts} intentos.`;
+            feedback.innerHTML = `<span style="color: red;">Intento fallido. Te quedan ${attempts} intentos. </span>`;
             provideHint(guess);
         } else {
-            feedback.innerText = `¡Lo siento, ${playerName}! Has agotado todos tus intentos. El número era ${randomNum}.`;
+            feedback.innerHTML = `<span style="color: red;">¡Lo siento, ${playerName}! Has agotado todos tus intentos. El número era ${randomNum}.</span>`;
         }
+        document.getElementById("attemptCount").innerText = attempts;
     }
 }
-
 
 function provideHint(guess) {
     const hint = document.getElementById("hint");
@@ -87,24 +137,18 @@ function provideHint(guess) {
     }
 }
 
-
-// Reset the hint when resetting the game
 function resetGame() {
     attempts = 5;
+    minNumberConfirmed = false;
+    maxNumberConfirmed = false;
     document.getElementById("minNumber").value = "";
     document.getElementById("maxNumber").value = "";
     document.getElementById("feedback2").innerText = "";
     document.getElementById("hint").innerText = "";
 
-    // Скрыть "gameSection2" после сброса
     document.getElementById("gameSection2").style.display = "none";
-
-    // Показать "gameSection1"
     document.getElementById("gameSection1").style.display = "block";
 }
-
-
-// Rest of your code...
 
 function toggleContrast() {
     var body = document.body;
@@ -113,6 +157,11 @@ function toggleContrast() {
     var container = document.querySelector('.container');
     if (container) {
         container.classList.toggle('high-contrast');
+    }
+
+    var gameSection2 = document.getElementById('gameSection2');
+    if (gameSection2) {
+        gameSection2.classList.toggle('high-contrast');
     }
 }
 
@@ -141,28 +190,22 @@ function updateFontSize() {
 }
 
 function generateNumberRange() {
-    minNumber = parseInt(document.getElementById("minNumber").value);
-    maxNumber = parseInt(document.getElementById("maxNumber").value);
-
-    // Validate input
-    if (isNaN(minNumber) || isNaN(maxNumber) || minNumber < 1 || minNumber > 10 || maxNumber < 30 || maxNumber > 40) {
-        alert("Por favor, ingresa números válidos. El rango para el primer número debe ser entre 1 y 10, y para el segundo entre 30 y 40.");
+    if (!minNumberConfirmed || !maxNumberConfirmed) {
+        document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, confirma ambos números antes de jugar.</p>";
         return;
     }
 
-    // Generate a random number within the specified range
+    document.getElementById("errorMessage").innerHTML = "";
+
     randomNum = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
 
-    // Display the selected number range in the paragraph with id "numberRange"
-    document.getElementById("numberRange").innerText = `Número seleccionado entre ${minNumber} y ${maxNumber}: ${randomNum}`;
-
-    // Hide gameSection1 and show gameSection2
     document.getElementById("gameSection1").style.display = "none";
     document.getElementById("gameSection2").style.display = "block";
 
-    // Update the player name in gameSection2
     document.getElementById("outputPlayerName2").innerText = playerName;
 
-    // Initialize number buttons in gameSection2
     initializeNumberButtons();
+    document.getElementById("minDisplay").innerText = minNumber;
+    document.getElementById("maxDisplay").innerText = maxNumber;
+    document.getElementById("attemptCount").innerText = attempts;
 }

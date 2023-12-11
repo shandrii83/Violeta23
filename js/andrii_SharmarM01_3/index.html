@@ -12,18 +12,26 @@
 <body>
     <div class="container">
         <h1>Juego de Adivinanza
-            <span class="fa fa-adjust" style="font-size:24px" onclick="toggleContrast()"> </span>
+
             <div>
-                <button onclick="increaseFontSize()">Aumentar tamaño</button>
-                <button onclick="decreaseFontSize()">Reducir tamaño</button>
+                <div>
+                    <button onclick="toggleContrast()"> <img src="/img/contrast-16.png" alt="Toggle Contrast"> </button>
+                    <button onclick="increaseFontSize()"><img src="/img/increase-font-16.png"
+                            alt="Aumentar tamaño"></button>
+                    <button onclick="decreaseFontSize()"><img src="/img/decrease-font-16.png"
+                            alt="Reducir tamaño"></button>
+
+                </div>
             </div>
         </h1>
 
         <div id="nombreDelUsuario">
             <label for="playerName">Antes de empezar, por favor, dinos tu nombre:</label><br>
-            <input type="text" id="playerName" placeholder="Ingresa tu nombre">
+            <input type="text" id="playerName" placeholder="">
             <br>
             <button onclick="startGame()">Comenzar Juego</button>
+            <div id="errorMessage"></div>
+
         </div>
 
         <div id="gameArea">
@@ -36,10 +44,12 @@
                     adivinarlo.
                 </p>
                 <label for="minNumber">Escribe un número entre 1 y 10:</label><br>
-                <input type="number" id="minNumber" placeholder="Ingresa el número menor"><br>
+                <input type="number" id="minNumber"><br>
+                <button id="confirmMinButton" onclick="confirmMinNumber()">Confirmar Mínimo</button><br>
                 <label for="maxNumber">Escribe un número entre 30 y 40:</label><br>
-                <input type="number" id="maxNumber" placeholder="Ingresa el número mayor"><br>
-                <button onclick="generateNumberRange()">Jugar!</button>
+                <input type="number" id="maxNumber"><br>
+                <button id="confirmMaxButton" onclick="confirmMaxNumber()">Confirmar Máximo</button><br>
+                <button id="playButton" onclick="generateNumberRange()">Jugar</button><br>
                 <!-- <p id="numberRange"></p> -->
                 <p id="feedback1"></p>
                 <button onclick="resetGame()">Jugar de Nuevo</button>
@@ -47,13 +57,14 @@
 
             <section id="gameSection2">
                 <div class="game-content">
-                    <p><span id="outputPlayerName2"></span>! El juego consiste en lo siguiente: tendrás que indicarnos
-                        un
-                        número de 1 a 10 y después otro del 30 al 40. Entonces, la máquina seleccionará, de manera
-                        aleatoria, otro dentro del rango comprendido entre las dos cifras que has designado. Tendrás 5
-                        intentos para adivinarlo.
-                    </p>
-                    <p id="numberRange"></p>
+
+                    <p id="gameSection2Message"><span id="outputPlayerName2"></span>, tus numeros son el <span
+                            id="minDisplay"></span> y el <span id="maxDisplay"></span>. Adivina el numero dentro de este
+                        rango que ha pensado la maquina de manera aleatoria. Este es tu intento <span
+                            id="attemptCount">(aquí tiene que cambiarse la cantidad de intentos correspondientes)</span>
+                        de 5</p>
+
+                    <!--  <p id="numberRange"></p> -->
                     <div id="numberButtons"></div>
 
 
