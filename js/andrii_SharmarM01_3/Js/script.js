@@ -61,6 +61,8 @@ function confirmMinNumber() {
 }
 
 
+
+
 /* document.getElementById("confirmationMessage").innerHTML = "<p style='color: green;'>Número mínimo confirmado: " + minNumber + "</p>"; */
 function confirmMaxNumber() {
     const maxInput = document.getElementById("maxNumberInput");
@@ -147,7 +149,6 @@ function initializeNumberButtons() {
 function highlightButton(button) {
     button.classList.add("selected");
 }
-
 function checkGuess(guess) {
     const feedback = document.getElementById("feedback2");
 
@@ -161,10 +162,16 @@ function checkGuess(guess) {
             provideHint(guess);
         } else {
             feedback.innerHTML = `<span style="color: red;">¡Lo siento, ${playerName}! Has agotado todos tus intentos. El número era ${randomNum}.</span>`;
+
+            // После превышения попыток, покажите кнопку "Jugar de Nuevo"
+            document.getElementById("playAgainButton").style.display = "inline-block";
         }
         document.getElementById("attemptCount").innerText = attempts;
     }
 }
+
+
+
 
 function provideHint(guess) {
     const hint = document.getElementById("hint");
@@ -193,7 +200,9 @@ function resetGame() {
     // Hide relevant elements on reset
     document.getElementById("maxNumberInput").style.display = "none";
     document.getElementById("confirmMaxButton").style.display = "none";
-    document.getElementById("playButton").style.display = "none";
+
+    // Show "Jugar" button
+    document.getElementById("playButton").style.display = "block";
 
     document.getElementById("gameSection2").style.display = "none";
     document.getElementById("gameSection1").style.display = "block";
@@ -202,20 +211,71 @@ function resetGame() {
     maxNumberConfirmed = false;
     updateConfirmationButtons();
 
-    // Show "Jugar de nuevo" and "No" buttons after resetting the game
-    showRestartButtons();
+    // Hide "Jugar de Nuevo" and "Terminar juego" buttons after resetting the game
+    hideRestartButtons();
 }
 
-function showRestartButtons() {
-    document.getElementById("playAgainButton").style.display = "block";
-    document.getElementById("noButton").style.display = "block";
+function hideRestartButtons() {
+    document.getElementById("playAgainButton").style.display = "none";
+    document.getElementById("noButton").style.display = "none";
 }
 
 function endGame() {
-    // Add any logic you need for ending the game
-    document.getElementById("gameArea").style.display = "none";
+    // Reset the game state
+    attempts = 5;
+    minNumberConfirmed = false;
+    maxNumberConfirmed = false;
+
+    // Clear input values
+    document.getElementById("minNumber").value = "";
+    document.getElementById("maxNumberInput").value = "";
+
+    // Clear feedback and hint
+    document.getElementById("feedback2").innerText = "";
+    document.getElementById("hint").innerText = "";
+
+    // Clear confirmation messages
+    document.getElementById("confirmationMessage").innerHTML = "";
+    document.getElementById("confirmationMessageMax").innerHTML = "";
+
+    // Enable input fields
+    document.getElementById("minNumber").disabled = false;
+    document.getElementById("maxNumberInput").disabled = false;
+
+    // Hide relevant elements
+    var maxNumberInput = document.getElementById("maxNumberInput");
+    if (maxNumberInput) {
+        maxNumberInput.style.display = "none";
+    }
+
+    var confirmMaxButton = document.getElementById("confirmMaxButton");
+    if (confirmMaxButton) {
+        confirmMaxButton.style.display = "none";
+    }
+
+    var playButton = document.getElementById("playButton");
+    if (playButton) {
+        playButton.style.display = "none";
+    }
+
+    // Hide "Jugar de nuevo" button
+    var playAgainButton = document.getElementById("playAgainButton");
+    if (playAgainButton) {
+        playAgainButton.style.display = "none";
+    }
+
+    // Show "No" button
+    var noButton = document.getElementById("noButton");
+    if (noButton) {
+        noButton.style.display = "inline-block";
+    }
+
+    // Display the initial section to enter the player's name
     document.getElementById("nombreDelUsuario").style.display = "block";
+    document.getElementById("gameArea").style.display = "none";
 }
+
+
 function toggleContrast() {
     var body = document.body;
     body.classList.toggle('high-contrast');

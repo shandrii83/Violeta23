@@ -36,7 +36,8 @@
 
         <div id="gameArea">
             <section id="gameSection1">
-                <p>Bienvenido, <span id="outputPlayerName1"></span>! El juego consiste en lo siguiente: tendrás que
+                <p tabindex="0">Bienvenido, <span id="outputPlayerName1"></span>! El juego consiste en lo siguiente:
+                    tendrás que
                     indicarnos
                     un número de 1 a 10 y después otro del 30 al 40. Entonces, la máquina seleccionará, de manera
                     aleatoria,
@@ -61,16 +62,18 @@
 
             <section id="gameSection2">
                 <div class="game-content">
-                    <p id="gameSection2Message"><span id="outputPlayerName2"></span>, tus numeros son el <span
-                            id="minDisplay"></span> y el <span id="maxDisplay"></span>. Adivina el numero dentro de este
+                    <p tabindex="0" id="gameSection2Message"><span id="outputPlayerName2"></span>, tus numeros son el
+                        <span id="minDisplay"></span> y el <span id="maxDisplay"></span>. Adivina el numero dentro de
+                        este
                         rango que ha pensado la maquina de manera aleatoria. Este es tu intento <span
                             id="attemptCount">(aquí tiene que cambiarse la cantidad de intentos correspondientes)</span>
-                        de 5</p>
+                        de 5
+                    </p>
                     <div id="numberButtons"></div>
                     <div id="hint"></div>
                     <p id="feedback2"></p>
-                    <button onclick="resetGame()">Jugar de Nuevo</button>
-                    <button id="noButton" onclick="endGame()">Terminar juego</button>
+                    <button id="playAgainButton" onclick="resetGame()" style="display: none;">Jugar de Nuevo</button>
+                    <button id="noButton" onclick=" endGame()">Terminar juego</button>
                 </div>
             </section>
         </div>

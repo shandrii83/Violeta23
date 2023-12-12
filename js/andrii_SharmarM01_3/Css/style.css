@@ -148,11 +148,6 @@ input:hover {
     color: #ffffff;
 }
 
-.container h1:hover {
-    background-image: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff);
-    background-size: 200% 200%;
-    animation: gradientAnimation 5s infinite;
-}
 
 @keyframes gradientAnimation {
     0% {
