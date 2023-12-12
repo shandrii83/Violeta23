@@ -9,7 +9,6 @@ body {
     padding: 0;
     color: #333333;
     max-width: 600px;
-
 }
 
 body.high-contrast {
@@ -29,7 +28,6 @@ body.high-contrast {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: solid 2px;
     border-color: rgb(183, 183, 183);
-
 }
 
 .container h1 {
@@ -43,11 +41,10 @@ body.high-contrast {
     display: flex;
     justify-content: space-around;
     align-items: center;
-
 }
 
 .container h1 button {
-    background-color: #000000;
+    background-color: teal;
     width: 50px;
     height: max-content;
 }
@@ -69,9 +66,7 @@ button:hover {
     background-color: rgb(142, 142, 142);
     color: #333333;
     border: 2px rgb(116, 33, 175) solid;
-
 }
-
 
 input,
 button {
@@ -79,29 +74,23 @@ button {
 }
 
 input:hover {
-
     border: 2px solid rgb(116, 33, 175);
 }
 
 #nombreDelUsuario {
     padding: 10px;
-
 }
 
 #playerName {
     font-size: 20px;
-    /* border: teal solid 4px; */
     padding: 5px;
-    /* width: 20vh; */
     border: none;
     border-bottom: darkgray 2px solid;
-
 }
 
 #playerName:hover,
 #gameArea input:hover {
     border: 3px solid rgb(116, 33, 175);
-
 }
 
 #gameArea {
@@ -114,9 +103,6 @@ input:hover {
     border: none;
     border-bottom: darkgray solid 2px;
 }
-
-
-
 
 .selectable-number {
     display: inline-block;
@@ -139,12 +125,10 @@ input:hover {
 }
 
 #feedback2 {
-
     margin-top: 20px;
     font-weight: bold;
     color: #e74c3c;
 }
-
 
 #gameSection2 {
     display: none;
@@ -164,8 +148,6 @@ input:hover {
     color: #ffffff;
 }
 
-
-/* anadimos animacion a h1 */
 .container h1:hover {
     background-image: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff);
     background-size: 200% 200%;
@@ -180,4 +162,8 @@ input:hover {
     100% {
         background-position: 100% 50%;
     }
+}
+
+#errorMessage {
+    display: block;
 }

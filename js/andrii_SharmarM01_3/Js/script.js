@@ -19,7 +19,13 @@ function startGame() {
     document.getElementById("outputPlayerName1").innerText = playerName;
 
     const minInput = document.getElementById("minNumber");
-    const maxInput = document.getElementById("maxNumber");
+    const maxInput = document.getElementById("maxNumberInput");
+
+    minInput.value = "";
+    maxInput.value = "";
+    minNumberConfirmed = false;
+    maxNumberConfirmed = false;
+    updateConfirmationButtons();
 
     document.getElementById("gameSection1").style.display = "block";
     document.getElementById("gameSection2").style.display = "none";
@@ -27,83 +33,116 @@ function startGame() {
     document.getElementById("gameArea").style.display = "block";
     document.getElementById("nombreDelUsuario").style.display = "none";
 
-    initializeNumberButtons();
+    setTimeout(initializeNumberButtons, 0);
     document.getElementById("outputPlayerName2").innerText = playerName;
 }
 
+/* document.getElementById("confirmationMessage").innerHTML = "<p style='color: green;'>Número mínimo confirmado: " + minNumber + "</p>"; */
 function confirmMinNumber() {
-    minNumber = parseInt(document.getElementById("minNumber").value);
+    const minInput = document.getElementById("minNumber");
+    const minErrorMessage = document.getElementById("confirmationMessage");
+
+    minNumber = parseInt(minInput.value);
 
     if (isNaN(minNumber) || minNumber < 1 || minNumber > 10) {
-        document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, ingresa un número válido entre 1 y 10.</p>";
+        minErrorMessage.innerHTML = "<p style='color: red;'>Por favor, ingresa un número válido entre 1 y 10.</p>";
         return;
     }
 
-    document.getElementById("errorMessage").innerHTML = "";
+    minErrorMessage.innerHTML = "";
     minNumberConfirmed = true;
     updateConfirmationButtons();
+    minInput.disabled = true;
+    document.getElementById("confirmationMessage").innerHTML = "<p style='color: green;'>Número mínimo confirmado: " + minNumber + "</p>";
+
+    // Show maxNumber input and button after confirming minNumber
+    document.getElementById("maxNumberInput").style.display = "block";
+    document.getElementById("confirmMaxButton").style.display = "block";
 }
 
-function confirmMaxNumber() {
-    maxNumber = parseInt(document.getElementById("maxNumber").value);
 
-    if (!minNumberConfirmed) {
-        document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, confirma el número mínimo antes de ingresar el máximo.</p>";
-        return;
-    }
+/* document.getElementById("confirmationMessage").innerHTML = "<p style='color: green;'>Número mínimo confirmado: " + minNumber + "</p>"; */
+function confirmMaxNumber() {
+    const maxInput = document.getElementById("maxNumberInput");
+    const maxErrorMessage = document.getElementById("confirmationMessageMax");
+
+    maxNumber = parseInt(maxInput.value);
 
     if (isNaN(maxNumber) || maxNumber < 30 || maxNumber > 40) {
-        document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, ingresa un número válido entre 30 y 40.</p>";
+        maxErrorMessage.innerHTML = "<p style='color: red;'>Por favor, ingresa un número válido entre 30 y 40.</p>";
         return;
     }
 
-    document.getElementById("errorMessage").innerHTML = "";
+    maxErrorMessage.innerHTML = "";
     maxNumberConfirmed = true;
     updateConfirmationButtons();
+    maxInput.disabled = true;
+
+    document.getElementById("confirmationMessageMax").innerHTML = "<p style='color: green;'>Número máximo confirmado: " + maxNumber + "</p>";
+
+    // Show playButton after confirming maxNumber
+    document.getElementById("playButton").style.display = "block";
 }
+
+
+
 
 
 function updateConfirmationButtons() {
-    const confirmMinButton = document.getElementById("confirmMinButton");
-    const confirmMaxButton = document.getElementById("confirmMaxButton");
-    const playButton = document.getElementById("playButton");
-
-    if (!confirmMinButton || !confirmMaxButton || !playButton) {
-        console.error("One or more buttons not found.");
-        return;
-    }
-
-    confirmMinButton.disabled = minNumberConfirmed;
-    confirmMaxButton.disabled = maxNumberConfirmed;
+    document.getElementById("confirmMinButton").disabled = minNumberConfirmed;
+    document.getElementById("confirmMaxButton").disabled = maxNumberConfirmed;
 
     if (minNumberConfirmed && maxNumberConfirmed) {
-        playButton.disabled = false;
+        document.getElementById("playButton").disabled = false;
+
+        document.getElementById("minNumber").disabled = true;
+        document.getElementById("maxNumberInput").disabled = true;
     }
 }
 
+
 function initializeNumberButtons() {
+    const minInput = document.getElementById("minNumber");
+    const maxInput = document.getElementById("maxNumberInput");
+
+    if (!minInput || !maxInput) {
+        console.error("minNumber or maxNumberInput element not found.");
+        return;
+    }
+
     const numberButtonsContainer = document.getElementById("numberButtons");
 
-    numberButtonsContainer.innerHTML = "";
+    const min = parseInt(minInput.value);
+    const max = parseInt(maxInput.value);
 
-    const min = parseInt(document.getElementById("minNumber").value);
-    const max = parseInt(document.getElementById("maxNumber").value);
+    if (isNaN(min) || isNaN(max)) {
+        console.error("Invalid or missing values for minNumber or maxNumber.");
+        return;
+    }
+
+    numberButtonsContainer.innerHTML = "";
 
     for (let i = min; i <= max; i++) {
         const numberButton = document.createElement("button");
         numberButton.textContent = i;
         numberButton.classList.add("selectable-number");
 
-        numberButton.addEventListener("click", function () {
-            highlightButton(this);
-            checkGuess(i);
-        });
+        // Use a closure to capture the correct value of i
+        (function (value) {
+            numberButton.addEventListener("click", function () {
+                highlightButton(this);
+                checkGuess(value);
+            });
+        })(i);
 
         numberButtonsContainer.appendChild(numberButton);
     }
 
     numberButtonsContainer.style.display = "block";
 }
+
+
+
 
 function highlightButton(button) {
     button.classList.add("selected");
@@ -139,17 +178,44 @@ function provideHint(guess) {
 
 function resetGame() {
     attempts = 5;
-    minNumberConfirmed = false;
-    maxNumberConfirmed = false;
     document.getElementById("minNumber").value = "";
-    document.getElementById("maxNumber").value = "";
+    document.getElementById("maxNumberInput").value = "";
     document.getElementById("feedback2").innerText = "";
     document.getElementById("hint").innerText = "";
+    document.getElementById("errorMessage").innerHTML = "";
+    document.getElementById("confirmationMessage").innerHTML = "";
+    document.getElementById("confirmationMessageMax").innerHTML = "";
+
+    // Enable input fields after resetting the game
+    document.getElementById("minNumber").disabled = false;
+    document.getElementById("maxNumberInput").disabled = false;
+
+    // Hide relevant elements on reset
+    document.getElementById("maxNumberInput").style.display = "none";
+    document.getElementById("confirmMaxButton").style.display = "none";
+    document.getElementById("playButton").style.display = "none";
 
     document.getElementById("gameSection2").style.display = "none";
     document.getElementById("gameSection1").style.display = "block";
+
+    minNumberConfirmed = false;
+    maxNumberConfirmed = false;
+    updateConfirmationButtons();
+
+    // Show "Jugar de nuevo" and "No" buttons after resetting the game
+    showRestartButtons();
 }
 
+function showRestartButtons() {
+    document.getElementById("playAgainButton").style.display = "block";
+    document.getElementById("noButton").style.display = "block";
+}
+
+function endGame() {
+    // Add any logic you need for ending the game
+    document.getElementById("gameArea").style.display = "none";
+    document.getElementById("nombreDelUsuario").style.display = "block";
+}
 function toggleContrast() {
     var body = document.body;
     body.classList.toggle('high-contrast');
@@ -204,8 +270,13 @@ function generateNumberRange() {
 
     document.getElementById("outputPlayerName2").innerText = playerName;
 
+
     initializeNumberButtons();
+
     document.getElementById("minDisplay").innerText = minNumber;
     document.getElementById("maxDisplay").innerText = maxNumber;
     document.getElementById("attemptCount").innerText = attempts;
 }
+
+
+
