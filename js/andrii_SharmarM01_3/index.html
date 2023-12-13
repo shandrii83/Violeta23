@@ -14,12 +14,12 @@
         <h1>Juego de Adivinanza
             <div>
                 <div>
-                    <button onclick="toggleContrast()"> <img src="img/9043859_brightness_contrast_icon.png"
-                            alt="Toggle Contrast"> </button>
-                    <button onclick="increaseFontSize()">
+                    <button onclick="toggleContrast()" aria-label="Toggle Contrast"> <img
+                            src="img/9043859_brightness_contrast_icon.png" alt="Toggle Contrast"> </button>
+                    <button onclick="increaseFontSize()" aria-label="Increase Font Size">
                         <img src="img/text_increase_FILL0_wght400_GRAD0_opsz24.png" alt="Aumentar tamaño">
                     </button>
-                    <button onclick="decreaseFontSize()">
+                    <button onclick="decreaseFontSize()" aria-label="Decrease Font Size">
                         <img src="img/text_decrease_FILL0_wght400_GRAD0_opsz24.png" alt="Reducir tamaño">
                     </button>
                 </div>
@@ -59,9 +59,9 @@
                     <input type="number" id="maxNumberInput"><br>
                     <button id="confirmMaxButton" onclick="confirmMaxNumber()">Confirmar Máximo</button><br>
                     <br>
-                    <div id="confirmationMessageMax"></div>
+                    <div tabindex="0" id="confirmationMessageMax"></div>
 
-                    <p id="feedback1"></p>
+                    <p tabindex="0" id="feedback1"></p>
 
 
                 </div>
@@ -71,6 +71,7 @@
                     <button id="playButton" onclick="generateNumberRange()" disabled>Jugar</button><br>
 
                 </div>
+
 
             </section>
 
@@ -84,8 +85,8 @@
                         de 5
                     </p>
                     <div id="numberButtons"></div>
-                    <div id="hint"></div>
-                    <p id="feedback2"></p>
+                    <div tabindex="0" id="hint"></div>
+                    <p tabindex="0" id="feedback2"></p>
                     <button id="playAgainButton" onclick="resetGame()" style="display: none;">Jugar de Nuevo</button>
                     <button id="noButton" onclick=" endGame()">Terminar juego</button>
 

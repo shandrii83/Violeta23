@@ -9,6 +9,7 @@ body {
     padding: 0;
     color: #333333;
     max-width: 600px;
+
 }
 
 body.high-contrast {
@@ -54,7 +55,7 @@ body.high-contrast {
 }
 
 button {
-    background-color: teal;
+    background-color: #3498db;
     color: #fff;
     padding: 10px;
     border: 1px white solid;
@@ -63,9 +64,15 @@ button {
 }
 
 button:hover {
-    background-color: rgb(142, 142, 142);
-    color: #333333;
-    border: 2px rgb(116, 33, 175) solid;
+    background-color: #2980b9;
+    color: #fff;
+
+    border: 2px #fff solid;
+}
+
+button:focus,
+input:focus {
+    outline: 2px solid #3498db;
 }
 
 input,
@@ -74,7 +81,7 @@ button {
 }
 
 input:hover {
-    border: 2px solid rgb(116, 33, 175);
+    border: 2px solid #3498db;
 }
 
 #nombreDelUsuario {
@@ -90,7 +97,7 @@ input:hover {
 
 #playerName:hover,
 #gameArea input:hover {
-    border: 3px solid rgb(116, 33, 175);
+    border: 3px solid #3498db;
 }
 
 #gameArea {
@@ -149,6 +156,20 @@ input:hover {
 }
 
 
+
+#errorMessage {
+    display: block;
+}
+
+.inputMax {
+    display: none;
+}
+
+body {
+    background: linear-gradient(45deg, #3498db, #8e44ad);
+    animation: gradientAnimation 5s ease infinite;
+}
+
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -159,10 +180,16 @@ input:hover {
     }
 }
 
-#errorMessage {
-    display: block;
+[tabindex]:hover {
+
+    border: 2px solid #2980b9;
 }
 
-.inputMax {
-    display: none;
+[tabindex]:focus {
+    outline: none;
+    /* Убираем стандартный контур фокуса */
+    border: 2px solid #ff0000;
+    /* Замените на желаемый цвет обводки */
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    /* Добавим тень для эффекта */
 }
