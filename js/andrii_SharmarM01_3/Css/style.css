@@ -75,6 +75,14 @@ input:focus {
     outline: 2px solid #3498db;
 }
 
+button:focus,
+button[aria-pressed="true"] {
+    background-color: #2980b9;
+    color: #fff;
+    border: 2px #fff solid;
+}
+
+
 input,
 button {
     margin: 10px 0;
@@ -180,10 +188,6 @@ body {
     }
 }
 
-[tabindex]:hover {
-
-    border: 2px solid #2980b9;
-}
 
 [tabindex]:focus {
     outline: none;

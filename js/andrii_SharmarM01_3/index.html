@@ -14,12 +14,12 @@
         <h1>Juego de Adivinanza
             <div>
                 <div>
-                    <button onclick="toggleContrast()" aria-label="Toggle Contrast"> <img
+                    <button onclick="toggleContrast()" aria-label="Toggle Contrast" role="button"> <img
                             src="img/9043859_brightness_contrast_icon.png" alt="Toggle Contrast"> </button>
-                    <button onclick="increaseFontSize()" aria-label="Increase Font Size">
+                    <button onclick="increaseFontSize()" aria-label="Increase Font Size" role="button">
                         <img src="img/text_increase_FILL0_wght400_GRAD0_opsz24.png" alt="Aumentar tamaño">
                     </button>
-                    <button onclick="decreaseFontSize()" aria-label="Decrease Font Size">
+                    <button onclick="decreaseFontSize()" aria-label="Decrease Font Size" role="button">
                         <img src="img/text_decrease_FILL0_wght400_GRAD0_opsz24.png" alt="Reducir tamaño">
                     </button>
                 </div>
@@ -48,31 +48,25 @@
                     </p>
                     <label for="minNumber">Escribe un número entre 1 y 10:</label><br>
                     <input type="number" id="minNumber"><br>
-                    <button id="confirmMinButton" onclick="confirmMinNumber()">Confirmar Mínimo</button><br>
+                    <button id="confirmMinButton" onclick="confirmMinNumber()" role="button">Confirmar
+                        Mínimo</button><br>
                     <div id="confirmationMessage"></div>
 
                 </div>
 
-
                 <div class="inputMax">
                     <label for="maxNumber">Escribe un número entre 30 y 40:</label><br>
                     <input type="number" id="maxNumberInput"><br>
-                    <button id="confirmMaxButton" onclick="confirmMaxNumber()">Confirmar Máximo</button><br>
+                    <button id="confirmMaxButton" onclick="confirmMaxNumber()" role="button">Confirmar
+                        Máximo</button><br>
                     <br>
-                    <div tabindex="0" id="confirmationMessageMax"></div>
-
-                    <p tabindex="0" id="feedback1"></p>
-
+                    <div id="confirmationMessageMax" aria-live="assertive" aria-atomic="true"></div>
+                    <div tabindex="0" id="feedback1" aria-live="polite"></div>
 
                 </div>
                 <div>
-
-
-                    <button id="playButton" onclick="generateNumberRange()" disabled>Jugar</button><br>
-
+                    <button id="playButton" onclick="generateNumberRange()" disabled role="button">Jugar</button><br>
                 </div>
-
-
             </section>
 
             <section id="gameSection2">
@@ -87,9 +81,9 @@
                     <div id="numberButtons"></div>
                     <div tabindex="0" id="hint"></div>
                     <p tabindex="0" id="feedback2"></p>
-                    <button id="playAgainButton" onclick="resetGame()" style="display: none;">Jugar de Nuevo</button>
-                    <button id="noButton" onclick=" endGame()">Terminar juego</button>
-
+                    <button id="playAgainButton" onclick="resetGame()" style="display: none;" role="button">Jugar de
+                        Nuevo</button>
+                    <button id="noButton" onclick="endGame()" role="button">Terminar juego</button>
                 </div>
             </section>
         </div>
