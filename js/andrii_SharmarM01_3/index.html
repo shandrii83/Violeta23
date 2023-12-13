@@ -36,28 +36,42 @@
 
         <div id="gameArea">
             <section id="gameSection1">
-                <p tabindex="0">Bienvenido, <span id="outputPlayerName1"></span>! El juego consiste en lo siguiente:
-                    tendrás que
-                    indicarnos
-                    un número de 1 a 10 y después otro del 30 al 40. Entonces, la máquina seleccionará, de manera
-                    aleatoria,
-                    otro dentro del rango comprendido entre las dos cifras que has designado. Tendrás 5 intentos para
-                    adivinarlo.
-                </p>
-                <label for="minNumber">Escribe un número entre 1 y 10:</label><br>
-                <input type="number" id="minNumber"><br>
-                <button id="confirmMinButton" onclick="confirmMinNumber()">Confirmar Mínimo</button><br>
-                <div id="confirmationMessage"></div>
+                <div>
+                    <p tabindex="0">Bienvenido, <span id="outputPlayerName1"></span>! El juego consiste en lo siguiente:
+                        tendrás que
+                        indicarnos
+                        un número de 1 a 10 y después otro del 30 al 40. Entonces, la máquina seleccionará, de manera
+                        aleatoria,
+                        otro dentro del rango comprendido entre las dos cifras que has designado. Tendrás 5 intentos
+                        para
+                        adivinarlo.
+                    </p>
+                    <label for="minNumber">Escribe un número entre 1 y 10:</label><br>
+                    <input type="number" id="minNumber"><br>
+                    <button id="confirmMinButton" onclick="confirmMinNumber()">Confirmar Mínimo</button><br>
+                    <div id="confirmationMessage"></div>
 
-                <label for="maxNumber">Escribe un número entre 30 y 40:</label><br>
-                <input type="number" id="maxNumberInput"><br>
-                <button id="confirmMaxButton" onclick="confirmMaxNumber()">Confirmar Máximo</button><br>
-                <br>
-                <div id="confirmationMessageMax"></div>
+                </div>
 
-                <button id="playButton" onclick="generateNumberRange()" disabled>Jugar</button><br>
-                <p id="feedback1"></p>
-                <button onclick="resetGame()">Jugar de Nuevo</button>
+
+                <div class="inputMax">
+                    <label for="maxNumber">Escribe un número entre 30 y 40:</label><br>
+                    <input type="number" id="maxNumberInput"><br>
+                    <button id="confirmMaxButton" onclick="confirmMaxNumber()">Confirmar Máximo</button><br>
+                    <br>
+                    <div id="confirmationMessageMax"></div>
+
+                    <p id="feedback1"></p>
+
+
+                </div>
+                <div>
+
+
+                    <button id="playButton" onclick="generateNumberRange()" disabled>Jugar</button><br>
+
+                </div>
+
             </section>
 
             <section id="gameSection2">
@@ -74,6 +88,7 @@
                     <p id="feedback2"></p>
                     <button id="playAgainButton" onclick="resetGame()" style="display: none;">Jugar de Nuevo</button>
                     <button id="noButton" onclick=" endGame()">Terminar juego</button>
+
                 </div>
             </section>
         </div>

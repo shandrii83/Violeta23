@@ -12,6 +12,7 @@ function startGame() {
     if (/[0-9]/.test(playerName) || playerName.length < 3) {
         document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, ingresa un nombre válido con al menos 3 letras y sin números.</p>";
         return;
+        generateNumberRange();
     }
 
     document.getElementById("errorMessage").innerHTML = "";
@@ -35,9 +36,12 @@ function startGame() {
 
     setTimeout(initializeNumberButtons, 0);
     document.getElementById("outputPlayerName2").innerText = playerName;
+
+
+    generateNumberRange();
 }
 
-/* document.getElementById("confirmationMessage").innerHTML = "<p style='color: green;'>Número mínimo confirmado: " + minNumber + "</p>"; */
+
 function confirmMinNumber() {
     const minInput = document.getElementById("minNumber");
     const minErrorMessage = document.getElementById("confirmationMessage");
@@ -55,15 +59,12 @@ function confirmMinNumber() {
     minInput.disabled = true;
     document.getElementById("confirmationMessage").innerHTML = "<p style='color: green;'>Número mínimo confirmado: " + minNumber + "</p>";
 
-    // Show maxNumber input and button after confirming minNumber
-    document.getElementById("maxNumberInput").style.display = "block";
-    document.getElementById("confirmMaxButton").style.display = "block";
+
+    document.querySelector(".inputMax").style.display = "block";
+
+
 }
 
-
-
-
-/* document.getElementById("confirmationMessage").innerHTML = "<p style='color: green;'>Número mínimo confirmado: " + minNumber + "</p>"; */
 function confirmMaxNumber() {
     const maxInput = document.getElementById("maxNumberInput");
     const maxErrorMessage = document.getElementById("confirmationMessageMax");
@@ -82,26 +83,30 @@ function confirmMaxNumber() {
 
     document.getElementById("confirmationMessageMax").innerHTML = "<p style='color: green;'>Número máximo confirmado: " + maxNumber + "</p>";
 
-    // Show playButton after confirming maxNumber
+
     document.getElementById("playButton").style.display = "block";
 }
 
-
-
-
-
 function updateConfirmationButtons() {
-    document.getElementById("confirmMinButton").disabled = minNumberConfirmed;
-    document.getElementById("confirmMaxButton").disabled = maxNumberConfirmed;
+    const confirmMinButton = document.getElementById("confirmMinButton");
+    const confirmMaxButton = document.getElementById("confirmMaxButton");
+    const playButton = document.getElementById("playButton");
+
+    document.getElementById("minNumber").disabled = minNumberConfirmed;
+    document.getElementById("maxNumberInput").disabled = maxNumberConfirmed;
 
     if (minNumberConfirmed && maxNumberConfirmed) {
-        document.getElementById("playButton").disabled = false;
-
-        document.getElementById("minNumber").disabled = true;
-        document.getElementById("maxNumberInput").disabled = true;
+        playButton.style.display = "block";
+        playButton.disabled = false;
+        confirmMinButton.disabled = true;
+        confirmMaxButton.disabled = true;
+    } else {
+        playButton.style.display = "none";
+        playButton.disabled = true;
+        confirmMinButton.disabled = false;
+        confirmMaxButton.disabled = false;
     }
 }
-
 
 function initializeNumberButtons() {
     const minInput = document.getElementById("minNumber");
@@ -129,7 +134,7 @@ function initializeNumberButtons() {
         numberButton.textContent = i;
         numberButton.classList.add("selectable-number");
 
-        // Use a closure to capture the correct value of i
+
         (function (value) {
             numberButton.addEventListener("click", function () {
                 highlightButton(this);
@@ -185,11 +190,16 @@ function provideHint(guess) {
 
 function resetGame() {
     attempts = 5;
+
+    // Clear input values
     document.getElementById("minNumber").value = "";
     document.getElementById("maxNumberInput").value = "";
+
+    // Clear feedback and hint
     document.getElementById("feedback2").innerText = "";
     document.getElementById("hint").innerText = "";
-    document.getElementById("errorMessage").innerHTML = "";
+
+    // Clear confirmation messages
     document.getElementById("confirmationMessage").innerHTML = "";
     document.getElementById("confirmationMessageMax").innerHTML = "";
 
@@ -197,22 +207,20 @@ function resetGame() {
     document.getElementById("minNumber").disabled = false;
     document.getElementById("maxNumberInput").disabled = false;
 
-    // Hide relevant elements on reset
-    document.getElementById("maxNumberInput").style.display = "none";
-    document.getElementById("confirmMaxButton").style.display = "none";
-
-    // Show "Jugar" button
-    document.getElementById("playButton").style.display = "block";
-
-    document.getElementById("gameSection2").style.display = "none";
-    document.getElementById("gameSection1").style.display = "block";
-
+    // Reset the confirmation status of min and max numbers
     minNumberConfirmed = false;
     maxNumberConfirmed = false;
     updateConfirmationButtons();
 
-    // Hide "Jugar de Nuevo" and "Terminar juego" buttons after resetting the game
-    hideRestartButtons();
+    // Show the necessary elements on reset
+    document.querySelector(".inputMax").style.display = "block";
+    document.getElementById("confirmMaxButton").style.display = "block";
+
+    // Hide "Jugar de Nuevo" button
+    document.getElementById("playAgainButton").style.display = "none";
+
+    // Call the function to initialize the game again
+    startGame();
 }
 
 function hideRestartButtons() {
@@ -267,13 +275,27 @@ function endGame() {
     // Show "No" button
     var noButton = document.getElementById("noButton");
     if (noButton) {
-        noButton.style.display = "inline-block";
+        noButton.style.display = "block";
     }
 
     // Display the initial section to enter the player's name
     document.getElementById("nombreDelUsuario").style.display = "block";
     document.getElementById("gameArea").style.display = "none";
+    document.querySelector(".inputMax").style.display = "block";
+
+    var maxNumberInput = document.getElementById("maxNumberInput");
+    if (maxNumberInput) {
+        maxNumberInput.style.display = "block";  // Display the max number input field
+    }
+
+    var confirmMaxButton = document.getElementById("confirmMaxButton");
+    if (confirmMaxButton) {
+        confirmMaxButton.style.display = "block";  // Display the confirm max button
+    }
+
+
 }
+
 
 
 function toggleContrast() {

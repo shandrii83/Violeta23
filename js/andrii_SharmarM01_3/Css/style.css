@@ -162,3 +162,7 @@ input:hover {
 #errorMessage {
     display: block;
 }
+
+.inputMax {
+    display: none;
+}
