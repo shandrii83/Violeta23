@@ -5,28 +5,38 @@ let randomNum;
 let attempts = 5;
 let minNumberConfirmed = false;
 let maxNumberConfirmed = false;
+let guessedNumbers = [];
+
 
 function startGame() {
     playerName = document.getElementById("playerName").value;
 
+
     if (/[0-9]/.test(playerName) || playerName.length < 3) {
         document.getElementById("errorMessage").innerHTML = "<p style='color: red;'>Por favor, ingresa un nombre válido con al menos 3 letras y sin números.</p>";
         return;
-        generateNumberRange();
     }
+
 
     document.getElementById("errorMessage").innerHTML = "";
 
+
     document.getElementById("outputPlayerName1").innerText = playerName;
+
 
     const minInput = document.getElementById("minNumber");
     const maxInput = document.getElementById("maxNumberInput");
 
+
     minInput.value = "";
     maxInput.value = "";
+
+
     minNumberConfirmed = false;
     maxNumberConfirmed = false;
+    guessedNumbers = [];
     updateConfirmationButtons();
+
 
     document.getElementById("gameSection1").style.display = "block";
     document.getElementById("gameSection2").style.display = "none";
@@ -34,12 +44,18 @@ function startGame() {
     document.getElementById("gameArea").style.display = "block";
     document.getElementById("nombreDelUsuario").style.display = "none";
 
-    setTimeout(initializeNumberButtons, 0);
     document.getElementById("outputPlayerName2").innerText = playerName;
 
+    attempts = 5;
+
+    document.getElementById("attemptCount").innerText = attempts;
 
     generateNumberRange();
+    setTimeout(initializeNumberButtons, 0);
+
 }
+
+
 
 
 function confirmMinNumber() {
@@ -148,14 +164,27 @@ function initializeNumberButtons() {
     numberButtonsContainer.style.display = "block";
 }
 
-
+function makeGuess() {
+    const guess = parseInt(document.getElementById("guessedNumberInput").value);
+    checkGuess(guess);
+}
 
 
 function highlightButton(button) {
     button.classList.add("selected");
 }
+
+
+
 function checkGuess(guess) {
     const feedback = document.getElementById("feedback2");
+
+    if (guessedNumbers.includes(guess)) {
+        feedback.innerHTML = `<span style="color: red;">Ya has probado el número ${guess}. Intenta con uno diferente.</span>`;
+        return;
+    }
+
+    guessedNumbers.push(guess);
 
     if (guess === randomNum) {
         feedback.innerHTML = `<span style="color: green;">¡Felicidades, ${playerName}! Has acertado el número. El número era ${randomNum}.</span>`;
@@ -167,10 +196,9 @@ function checkGuess(guess) {
             provideHint(guess);
         } else {
             feedback.innerHTML = `<span style="color: red;">¡Lo siento, ${playerName}! Has agotado todos tus intentos. El número era ${randomNum}.</span>`;
-
-            // После превышения попыток, покажите кнопку "Jugar de Nuevo"
             document.getElementById("playAgainButton").style.display = "inline-block";
         }
+
         document.getElementById("attemptCount").innerText = attempts;
     }
 }
@@ -191,151 +219,34 @@ function provideHint(guess) {
 function resetGame() {
     attempts = 5;
 
-    // Clear input values
     document.getElementById("minNumber").value = "";
     document.getElementById("maxNumberInput").value = "";
 
-    // Clear feedback and hint
     document.getElementById("feedback2").innerText = "";
     document.getElementById("hint").innerText = "";
 
-    // Clear confirmation messages
     document.getElementById("confirmationMessage").innerHTML = "";
     document.getElementById("confirmationMessageMax").innerHTML = "";
 
-    // Enable input fields after resetting the game
     document.getElementById("minNumber").disabled = false;
     document.getElementById("maxNumberInput").disabled = false;
 
-    // Reset the confirmation status of min and max numbers
     minNumberConfirmed = false;
     maxNumberConfirmed = false;
+
+
     updateConfirmationButtons();
 
-    // Show the necessary elements on reset
     document.querySelector(".inputMax").style.display = "block";
     document.getElementById("confirmMaxButton").style.display = "block";
-
-    // Hide "Jugar de Nuevo" button
     document.getElementById("playAgainButton").style.display = "none";
 
-    // Call the function to initialize the game again
+    document.getElementById("attemptCount").innerText = attempts;
+
     startGame();
 }
 
-function hideRestartButtons() {
-    document.getElementById("playAgainButton").style.display = "none";
-    document.getElementById("noButton").style.display = "none";
-}
 
-function endGame() {
-    // Reset the game state
-    attempts = 5;
-    minNumberConfirmed = false;
-    maxNumberConfirmed = false;
-
-    // Clear input values
-    document.getElementById("minNumber").value = "";
-    document.getElementById("maxNumberInput").value = "";
-
-    // Clear feedback and hint
-    document.getElementById("feedback2").innerText = "";
-    document.getElementById("hint").innerText = "";
-
-    // Clear confirmation messages
-    document.getElementById("confirmationMessage").innerHTML = "";
-    document.getElementById("confirmationMessageMax").innerHTML = "";
-
-    // Enable input fields
-    document.getElementById("minNumber").disabled = false;
-    document.getElementById("maxNumberInput").disabled = false;
-
-    // Hide relevant elements
-    var maxNumberInput = document.getElementById("maxNumberInput");
-    if (maxNumberInput) {
-        maxNumberInput.style.display = "none";
-    }
-
-    var confirmMaxButton = document.getElementById("confirmMaxButton");
-    if (confirmMaxButton) {
-        confirmMaxButton.style.display = "none";
-    }
-
-    var playButton = document.getElementById("playButton");
-    if (playButton) {
-        playButton.style.display = "none";
-    }
-
-    // Hide "Jugar de nuevo" button
-    var playAgainButton = document.getElementById("playAgainButton");
-    if (playAgainButton) {
-        playAgainButton.style.display = "none";
-    }
-
-    // Show "No" button
-    var noButton = document.getElementById("noButton");
-    if (noButton) {
-        noButton.style.display = "block";
-    }
-
-    // Display the initial section to enter the player's name
-    document.getElementById("nombreDelUsuario").style.display = "block";
-    document.getElementById("gameArea").style.display = "none";
-    document.querySelector(".inputMax").style.display = "block";
-
-    var maxNumberInput = document.getElementById("maxNumberInput");
-    if (maxNumberInput) {
-        maxNumberInput.style.display = "block";  // Display the max number input field
-    }
-
-    var confirmMaxButton = document.getElementById("confirmMaxButton");
-    if (confirmMaxButton) {
-        confirmMaxButton.style.display = "block";  // Display the confirm max button
-    }
-
-
-}
-
-
-
-function toggleContrast() {
-    var body = document.body;
-    body.classList.toggle('high-contrast');
-
-    var container = document.querySelector('.container');
-    if (container) {
-        container.classList.toggle('high-contrast');
-    }
-
-    var gameSection2 = document.getElementById('gameSection2');
-    if (gameSection2) {
-        gameSection2.classList.toggle('high-contrast');
-    }
-}
-
-let fontSize = 16;
-
-function increaseFontSize() {
-    fontSize += 2;
-    updateFontSize();
-}
-
-function decreaseFontSize() {
-    fontSize -= 2;
-    updateFontSize();
-}
-
-function updateFontSize() {
-    var nombreDelUsuario = document.getElementById('nombreDelUsuario');
-    if (nombreDelUsuario) {
-        nombreDelUsuario.style.fontSize = fontSize + 'px';
-    }
-
-    var gameArea = document.getElementById('gameArea');
-    if (gameArea) {
-        gameArea.style.fontSize = fontSize + 'px';
-    }
-}
 
 function generateNumberRange() {
     if (!minNumberConfirmed || !maxNumberConfirmed) {
@@ -352,13 +263,127 @@ function generateNumberRange() {
 
     document.getElementById("outputPlayerName2").innerText = playerName;
 
-
     initializeNumberButtons();
 
     document.getElementById("minDisplay").innerText = minNumber;
     document.getElementById("maxDisplay").innerText = maxNumber;
+
     document.getElementById("attemptCount").innerText = attempts;
 }
+
+
+function toggleContrast() {
+    var body = document.body;
+    body.classList.toggle('high-contrast');
+
+    var container = document.querySelector('.container');
+    if (container) {
+        container.classList.toggle('high-contrast');
+    }
+
+    var gameSection2 = document.getElementById('gameSection2');
+    if (gameSection2) {
+        gameSection2.classList.toggle('high-contrast');
+    }
+}
+function increaseFontSize() {
+    fontSize += 2;
+    updateFontSize();
+}
+
+function decreaseFontSize() {
+    fontSize -= 2;
+    updateFontSize();
+}
+function hideRestartButtons() {
+    document.getElementById("playAgainButton").style.display = "none";
+    document.getElementById("noButton").style.display = "none";
+}
+
+function endGame() {
+
+    attempts = 5;
+    minNumberConfirmed = false;
+    maxNumberConfirmed = false;
+
+
+    document.getElementById("minNumber").value = "";
+    document.getElementById("maxNumberInput").value = "";
+
+
+    document.getElementById("feedback2").innerText = "";
+    document.getElementById("hint").innerText = "";
+
+
+    document.getElementById("confirmationMessage").innerHTML = "";
+    document.getElementById("confirmationMessageMax").innerHTML = "";
+
+
+    document.getElementById("minNumber").disabled = false;
+    document.getElementById("maxNumberInput").disabled = false;
+
+
+    var maxNumberInput = document.getElementById("maxNumberInput");
+    if (maxNumberInput) {
+        maxNumberInput.style.display = "none";
+    }
+
+    var confirmMaxButton = document.getElementById("confirmMaxButton");
+    if (confirmMaxButton) {
+        confirmMaxButton.style.display = "none";
+    }
+
+    var playButton = document.getElementById("playButton");
+    if (playButton) {
+        playButton.style.display = "none";
+    }
+
+
+    var playAgainButton = document.getElementById("playAgainButton");
+    if (playAgainButton) {
+        playAgainButton.style.display = "none";
+    }
+
+
+    var noButton = document.getElementById("noButton");
+    if (noButton) {
+        noButton.style.display = "block";
+    }
+
+
+    document.getElementById("nombreDelUsuario").style.display = "block";
+    document.getElementById("gameArea").style.display = "none";
+    document.querySelector(".inputMax").style.display = "block";
+
+    var maxNumberInput = document.getElementById("maxNumberInput");
+    if (maxNumberInput) {
+        maxNumberInput.style.display = "block";
+    }
+
+    var confirmMaxButton = document.getElementById("confirmMaxButton");
+    if (confirmMaxButton) {
+        confirmMaxButton.style.display = "block";
+    }
+
+
+}
+let fontSize = 16;
+
+
+
+function updateFontSize() {
+    var nombreDelUsuario = document.getElementById('nombreDelUsuario');
+    if (nombreDelUsuario) {
+        nombreDelUsuario.style.fontSize = fontSize + 'px';
+    }
+
+    var gameArea = document.getElementById('gameArea');
+    if (gameArea) {
+        gameArea.style.fontSize = fontSize + 'px';
+    }
+}
+
+
 
 
 
