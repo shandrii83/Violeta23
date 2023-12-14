@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather App</title>
+</head>
+
+<body>
+    <h1>Weather App</h1>
+    <div id="resultado">Introduce una ciudad y selecciona un país <br> Veamos qué tiempo hace</div>
+    <form action="#" method="post" name="formu" onsubmit="buscaTiempo(event)">
+        <label for="pais">País:</label>
+        <select name="pais" id="pais">
+            <option disabled selected>Selecciona país</option>
+            <option value="ES">España</option>
+            <option value="US">Estados Unidos</option>
+            <option value="GB">Inglaterra</option>
+            <option value="DE">Alemania</option>
+            <option value="IT">Italia</option>
+            <option value="FR">Francia</option>
+        </select>
+
+        <label for="ciudad">Ciudad:</label>
+        <select name="ciudad" id="ciudad">
+            <option disabled selected>Selecciona ciudad</option>
+            <!-- Cities for Spain -->
+            <option value="Madrid">Madrid</option>
+            <option value="Barcelona">Barcelona</option>
+            <option value="Sevilla">Sevilla</option>
+
+            <!-- Cities for the United States -->
+            <option value="Nueva York">Nueva York</option>
+            <option value="Los Angeles">Los Ángeles</option>
+            <option value="Chicago">Chicago</option>
+
+            <!-- Cities for England -->
+            <option value="Londres">Londres</option>
+            <option value="Manchester">Manchester</option>
+            <option value="Birmingham">Birmingham</option>
+
+            <!-- Cities for Germany -->
+            <option value="Berlín">Berlín</option>
+            <option value="Múnich">Múnich</option>
+            <option value="Hamburgo">Hamburgo</option>
+
+            <!-- Cities for Italy -->
+            <option value="Roma">Roma</option>
+            <option value="Milan">Milán</option>
+            <option value="Florencia">Florencia</option>
+
+            <!-- Cities for France -->
+            <option value="París">París</option>
+            <option value="Marsella">Marsella</option>
+            <option value="Lyon">Lyon</option>
+        </select>
+        <input type="submit" value="Mostrar">
+    </form>
+
+    <div id="weather-info">
+        <p id="weather-description">Clima: </p>
+        <p id="temperature">Temperatura: </p>
+        <p id="humidity">Humedad: </p>
+        <p id="wind-speed">Velocidad del viento: </p>
+        <p id="pressure">Presión: </p>
+    </div>
+
+    <div id="loading" style="display: none;">Cargando...</div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
