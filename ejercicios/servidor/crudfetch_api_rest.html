@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+
+<head>
+
+      <meta charset="UTF-8" />
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      <title>
+            CRUD API REST FETCH Y CRUD API CON XMLHttpRequest Synchrono </title>
+      <link rel="stylesheet" href="/style.css">
+
+</head>
+
+
+<body>
+
+      <h1>
+            CRUD API REST FETCH Y CRUD API CON XMLHttpRequest Synchrono</h1>
+
+      <section class="crud">
+
+            <article>
+
+                  <h2 class="crud-title">Afegir empleat</h2>
+
+                  <form class="crud-form">
+
+                        <!-- <input type="number" name="id" placeholder="id" required />
+
+                        <br /> -->
+
+                        <input type="text" name="nombre" placeholder="nombre" required />
+
+                        <br />
+
+                        <input type="text" name="empresa" placeholder="empresa" required />
+
+                        <br />
+
+                        <input type="text" name="trabaja" placeholder="trabajo" required />
+
+                        <br />
+
+                        <input type="submit" name="envio" id="envio" value="Enviar" />
+
+                        <input type="hidden" name="id" />
+
+                  </form>
+
+            </article>
+
+            <article>
+
+                  <h2>Ver empleados</h2>
+
+                  <table class="crud-table">
+
+                        <thead>
+                              <tr>
+                                    <th>id</th>
+                                    <th>Nombre</th>
+                                    <th>Empresa</th>
+                                    <th>Trabaja</th>
+                                    <th>Acciones</th>
+                              </tr>
+                        </thead>
+
+                        <tbody>
+                              <!-- <tr>
+                                    <td class="id"></td>
+                                    <td class="id"></td>
+                                    <td class="id"></td>
+                                    <td class="id"></td>
+                                    <td class="id"></td>
+                              </tr> -->
+                        </tbody>
+
+                  </table>
+
+            </article>
+
+      </section>
+
+      <template id="crud-template">
+
+            <tr>
+                  <td class="id"></td>
+                  <td class="name"></td>
+                  <td class="empresa"></td>
+                  <td class="trabaja"></td>
+
+                  <td>
+                        <button class="edit">Editar</button>
+                        <button class="delete">Eliminar</button>
+                  </td>
+            </tr>
+
+      </template>
+
+      <script>
+
+            const d = document,
+                  $table = d.querySelector(".crud-table"),
+                  $form = d.querySelector(".crud-form"),
+                  $title = d.querySelector(".crud-title"),
+                  $template = d.getElementById("crud-template").content,
+                  $fragment = d.createDocumentFragment();
+
+
+            //con XMLHttpRequest, sincrono
+            const GetSyncrono = (url) => {
+                  let xhr = new XMLHttpRequest();
+                  xhr.open("GET", url, false); // metodo sincrono
+                  xhr.send();
+
+                  if (xhr.status === 200) {
+                        return JSON.parse(xhr.responseText);
+                  } else {
+                        throw new Error(`HTTP request failed with status ${xhr.status}`);
+                  }
+            };
+
+
+            const getAll = () => {
+                  try {
+                        let json = GetSyncrono("http://localhost:5000/users");
+
+                        console.log(json);
+
+                        json.forEach((el) => {
+                              $template.querySelector(".id").textContent = el.id;
+                              $template.querySelector(".name").textContent = el.nombre;
+                              $template.querySelector(".empresa").textContent = el.empresa;
+                              $template.querySelector(".trabaja").textContent = el.trabajo;
+                              $template.querySelector(".edit").dataset.id = el.id;
+                              $template.querySelector(".edit").dataset.name = el.nombre;
+                              $template.querySelector(".edit").dataset.empresa = el.empresa;
+                              $template.querySelector(".edit").dataset.trabaja = el.trabajo;
+                              $template.querySelector(".delete").dataset.id = el.id;
+
+                              let $clone = d.importNode($template, true);
+                              $fragment.appendChild($clone);
+                        });
+
+                        $table.querySelector("tbody").appendChild($fragment);
+                  } catch (err) {
+                        let message = err.message || "Error";
+                        $table.insertAdjacentHTML(
+                              "afterend",
+                              `<p><b>Error: ${message}</b></p>`
+                        );
+                  }
+            };
+
+
+            //con Fetch API - metodo asimcrono
+
+
+            /*  const getAll = async () => {
+                   try {
+                         let res = await fetch("http://localhost:5000/users"),
+                               json = await res.json();
+ 
+                         if (!res.ok) throw { status: res.status, statusText: res.statusText };
+ 
+                         console.log(json);
+                         json.forEach((el) => {
+                               $template.querySelector(".id").textContent = el.id;
+                               $template.querySelector(".name").textContent = el.nombre;
+                               $template.querySelector(".empresa").textContent = el.empresa;
+                               $template.querySelector(".trabaja").textContent = el.trabajo;
+                               $template.querySelector(".edit").dataset.id = el.id;
+                               $template.querySelector(".edit").dataset.name = el.nombre;
+                               $template.querySelector(".edit").dataset.empresa = el.empresa;
+                               $template.querySelector(".edit").dataset.trabaja = el.trabajo;
+                               $template.querySelector(".delete").dataset.id = el.id;
+ 
+                               let $clone = d.importNode($template, true);
+                               $fragment.appendChild($clone);
+                         });
+ 
+                         $table.querySelector("tbody").appendChild($fragment);
+                   } catch (err) {
+                         let message = err.statusText || "Error";
+                         $table.insertAdjacentHTML("afterend",
+                               `<p>
+                                     <b>Error ${err.status}: ${message}</b>
+                               </p>`
+                         );
+                   }
+             }; */
+            d.addEventListener("DOMContentLoaded", getAll);
+            d.addEventListener("submit", async (e) => {
+                  if (e.target === $form) {
+                        e.preventDefault();
+
+                        if (!e.target.id.value) {
+                              //Create - POST
+                              try {
+                                    let options = {
+                                          method: "POST",
+                                          headers: {
+                                                "Content-type": "application/json; charset=utf-8",
+                                          },
+                                          body: JSON.stringify({
+                                                nombre: e.target.nombre.value,
+                                                empresa: e.target.empresa.value,
+                                                trabajo: e.target.trabaja.value,
+                                          }),
+                                    },
+                                          res = await fetch("http://localhost:5000/users", options),
+                                          json = await res.json();
+
+                                    if (!res.ok) throw { status: res.status, statusText: res.statusText };
+
+                                    location.reload();
+                              } catch (err) {
+                                    let message = err.statusText || "Error";
+                                    $form.insertAdjacentHTML("afterend",
+                                          `<p>
+                                                <b>Error ${err.status}: ${message}</b>
+                                          </p>`
+                                    );
+                              }
+                        } else {
+                              //Update - PUT
+                              try {
+                                    let options = {
+                                          method: "PUT",
+                                          headers: {
+                                                "Content-type": "application/json; charset=utf-8",
+                                          },
+                                          body: JSON.stringify({
+                                                nombre: e.target.nombre.value,
+                                                empresa: e.target.empresa.value,
+                                                trabajo: e.target.trabaja.value,
+                                          }),
+                                    },
+                                          res = await fetch(
+                                                `http://localhost:5000/users/${e.target.id.value}`,
+                                                options
+                                          ),
+                                          json = await res.json();
+
+                                    if (!res.ok)
+                                          throw { status: res.status, statusText: res.statusText };
+
+                                    location.reload();
+                              } catch (err) {
+                                    let message = err.statusText || "Ocurrió un error";
+                                    $form.insertAdjacentHTML("afterend",
+                                          `<p>
+                                                <b>Error ${err.status}: ${message}</b>
+                                          </p>`
+                                    );
+                              }
+                        }
+                  }
+            });
+
+            d.addEventListener("click", async (e) => {
+                  if (e.target.matches(".edit")) {
+                        $title.textContent = "Editar empleat";
+                        $form.nombre.value = e.target.dataset.name;
+                        $form.empresa.value = e.target.dataset.empresa;
+                        $form.trabaja.value = e.target.dataset.trabajo;
+                        $form.id.value = e.target.dataset.id;
+                  }
+
+                  if (e.target.matches(".delete")) {
+                        let isDelete = confirm(
+                              `¿Vols eliminar l'empleat? ${e.target.dataset.id}?`
+                        );
+
+                        if (isDelete) {
+                              //Delete - DELETE
+                              try {
+                                    let options = {
+                                          method: "DELETE",
+                                          headers: {
+                                                "Content-type": "application/json; charset=utf-8",
+                                          },
+                                    },
+                                          res = await fetch(
+                                                `http://localhost:5000/users/${e.target.dataset.id}`,
+                                                options
+                                          ),
+                                          json = await res.json();
+
+                                    if (!res.ok) throw { status: res.status, statusText: res.statusText };
+
+                                    location.reload();
+                              } catch (err) {
+                                    let message = err.statusText || "Error";
+                                    alert(`Error ${err.status}: ${message}`);
+                              }
+                        }
+                  }
+            });
+      </script>
+
+</body>
+
+
+</html>
